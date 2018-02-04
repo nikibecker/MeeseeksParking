@@ -2,6 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.csus.ecs.athena.meeseeksparking">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS__LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".MapsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,10 +29,14 @@
             </intent-filter>
         </activity>
 
-        <!--Google Map API-->
+        <!-- Google Map API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDyBZ9VaGczlsv363HGf2nxyUD2DBM8nwE"/>
+            android:value="AIzaSyDoeVSdNW_OtlJPVeHraaRKxhjlf_6f3CU" />
+
+        <activity android:name=".Settings" />
+        <activity android:name=".Overview" />
+        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>
