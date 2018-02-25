@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">MeeseeksParking</string>
     <string name="title_activity_maps">Map</string>
+    <string name="Back">Map</string>
+    <string name="Parking_Lots_Overview">Map</string>
+    <string name="Lot_5">Map</string>
+    <string name="Lot_7">Map</string>
+    <string name="Parking_Structure_1">Map</string>
+    <string name="Parking_Structure_2">Map</string>
+    <string name="Parking_Structure_3">Map</string>
 </resources>
