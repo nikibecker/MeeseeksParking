@@ -1,102 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.csus.ecs.athena.meeseeksparking.Overview">
-
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="355dp"
-        android:layout_height="503dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Back"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="279dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/Parking_Lots_Overview"
-            android:textAlignment="center"
-            tools:layout_editor_absoluteX="265dp"
-            tools:layout_editor_absoluteY="48dp" />
-
-    </GridLayout>
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
 
     <Button
-        android:id="@+id/parkinglot_button1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/Lot_5"
-        app:layout_constraintBottom_toTopOf="@+id/parkinglot_button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/parkinglot_button2"
-        android:layout_width="0dp"
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
-        android:text="@string/Lot_7"
-        app:layout_constraintBottom_toTopOf="@+id/parkinglot_button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parkinglot_button1" />
+        android:text="Back" />
+        android:onClick="goToMapsActivity"/>
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button7"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/button7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Parking Overview"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText4"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Parking Lots"
+        android:textAlignment="center" />
 
     <Button
-        android:id="@+id/parkinglot_button3"
-        android:layout_width="0dp"
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
-        android:text="@string/Parking_Structure_1"
-        app:layout_constraintBottom_toTopOf="@+id/parkinglot_button4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parkinglot_button2" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText5"
+        android:layout_toStartOf="@+id/lot_availability"
+        android:text="Lot 5" />
 
     <Button
-        android:id="@+id/parkinglot_button4"
-        android:layout_width="0dp"
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
-        android:text="@string/Parking_Structure_2"
-        app:layout_constraintBottom_toTopOf="@+id/button10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parkinglot_button3" />
+        android:layout_alignEnd="@+id/button8"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button8"
+        android:text="Lot 7" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editText5"
+        android:layout_below="@+id/button9"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Parking Structures"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/button10"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="223dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
-        android:text="@string/Parking_Structure_3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parkinglot_button4" />
+        android:layout_alignEnd="@+id/editText6"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="Structue 1" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button12"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button12"
+        android:text="Structue 3" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button10"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button10"
+        android:text="Structue 2" />
+
+    <EditText
+        android:id="@+id/lot_availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText5"
+        android:layout_alignBottom="@+id/editText5"
+        android:layout_toEndOf="@+id/editText5"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Availability"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/lot_numbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/editText5"
+        android:layout_toEndOf="@+id/editText5"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Numbers"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/lot_numbers3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button8"
+        android:layout_toEndOf="@+id/editText6"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Numbers"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/structure_availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText6"
+        android:layout_alignBottom="@+id/editText6"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/editText6"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Availability"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/structure_numbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button10"
+        android:layout_alignBottom="@+id/button10"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/editText6"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Numbers"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/structure_numbers2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/structure_numbers"
+        android:layout_toEndOf="@+id/button10"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Numbers"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/structure_numbers3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/structure_numbers2"
+        android:layout_toEndOf="@+id/button12"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Numbers"
+        android:textAlignment="center" />
+
+</RelativeLayout>
