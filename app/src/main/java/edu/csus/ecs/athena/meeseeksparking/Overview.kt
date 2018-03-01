@@ -15,7 +15,7 @@ class Overview : AppCompatActivity() {
     }
 
     fun goToOverview(view: View) {
-        val intent = Intent(this, Overview::class.java)
+        val intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
     }
 }
