@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToOverview"
-        android:text="@string/back"
+        android:text="back"
         tools:ignore="HardcodedText" />
 
     <EditText
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/button7"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Parking Lots"
@@ -44,6 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editText5"
         android:layout_toStartOf="@+id/lot_availability"
+        android:onClick="goToActivityLot5"
         android:text="Lot 5" />
 
     <Button
@@ -53,14 +54,15 @@
         android:layout_alignEnd="@+id/button8"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button8"
+        android:onClick="goToActivityLot7"
         android:text="Lot 7" />
 
     <EditText
         android:id="@+id/editText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText5"
-        android:layout_below="@+id/button9"
+        android:layout_above="@+id/structure_numbers"
+        android:layout_alignParentStart="true"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Parking Structures"
@@ -70,19 +72,22 @@
         android:id="@+id/button10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText6"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:text="Structue 1" />
+        android:layout_below="@+id/button9"
+        android:layout_marginTop="97dp"
+        android:layout_toStartOf="@+id/structure_availability"
+        android:onClick="goToActivityPS1"
+        android:text="Structure 1" />
 
     <Button
         android:id="@+id/button11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button12"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button12"
-        android:text="Structue 3" />
+        android:layout_toStartOf="@+id/structure_numbers2"
+        android:onClick="goToActivityPS3"
+        android:text="Structure 3" />
 
     <Button
         android:id="@+id/button12"
@@ -91,7 +96,8 @@
         android:layout_alignEnd="@+id/button10"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button10"
-        android:text="Structue 2" />
+        android:onClick="goToActivityPS2"
+        android:text="Structure 2" />
 
     <EditText
         android:id="@+id/lot_availability"
@@ -158,8 +164,8 @@
         android:id="@+id/structure_numbers2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/structure_numbers"
-        android:layout_toEndOf="@+id/button10"
+        android:layout_above="@+id/structure_numbers3"
+        android:layout_toEndOf="@+id/button12"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
@@ -169,7 +175,8 @@
         android:id="@+id/structure_numbers3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/structure_numbers2"
+        android:layout_alignBottom="@+id/button11"
+        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/button12"
         android:ems="10"
         android:inputType="textPersonName"
