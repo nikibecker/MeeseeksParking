@@ -17,8 +17,5 @@ class MapPS2 : AppCompatActivity() {
         setContentView(R.layout.activity_parking_structure_2)
     }
 
-    fun goToActivityPS2(view: View) {
-        val intent = Intent(this, MapPS2::class.java)
-        startActivity(intent)
-    }
+
 }

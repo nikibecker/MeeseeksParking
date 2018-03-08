@@ -16,9 +16,4 @@ class MapLot7 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_parking_lot_7)
     }
-
-    fun goToActivityLot7(view: View) {
-        val intent = Intent(this, MapLot7::class.java)
-        startActivity(intent)
-    }
 }

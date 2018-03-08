@@ -17,8 +17,4 @@ class MapPS3 : AppCompatActivity() {
         setContentView(R.layout.activity_parking_structure_3)
     }
 
-    fun goToActivityPS3(view: View) {
-        val intent = Intent(this, MapPS3::class.java)
-        startActivity(intent)
-    }
 }
