@@ -14,20 +14,23 @@
         android:text="back"
         tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/editText4"
+    <TextView
+        android:id="@+id/Text4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button7"
+        android:layout_above="@+id/Text5"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/button7"
+        android:autoText="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Parking Overview"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/editText5"
+    <TextView
+        android:id="@+id/Text5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -35,15 +38,18 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Parking Lots"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button9"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText5"
-        android:layout_toStartOf="@+id/lot_availability"
+        android:layout_below="@+id/Text5"
+        android:layout_marginTop="13dp"
         android:onClick="goToActivityLot5"
         android:text="Lot 5" />
 
@@ -51,22 +57,25 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button8"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button8"
+        android:layout_toStartOf="@+id/structure_availability"
         android:onClick="goToActivityLot7"
         android:text="Lot 7" />
 
-    <EditText
-        android:id="@+id/editText6"
+    <TextView
+        android:id="@+id/Text6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/structure_numbers"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Parking Structures"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button10"
@@ -85,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button12"
-        android:layout_toStartOf="@+id/structure_numbers2"
+        android:layout_toStartOf="@+id/structure_numbers3"
         android:onClick="goToActivityPS3"
         android:text="Structure 3" />
 
@@ -99,88 +108,102 @@
         android:onClick="goToActivityPS2"
         android:text="Structure 2" />
 
-    <EditText
+    <TextView
         android:id="@+id/lot_availability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText5"
-        android:layout_alignBottom="@+id/editText5"
-        android:layout_toEndOf="@+id/editText5"
+        android:layout_alignBaseline="@+id/Text5"
+        android:layout_alignBottom="@+id/Text5"
+        android:layout_toEndOf="@+id/Text5"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Availability"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/lot_numbers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button8"
+        android:layout_alignBottom="@+id/button8"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/editText5"
-        android:layout_toEndOf="@+id/editText5"
+        android:layout_toEndOf="@+id/button8"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/lot_numbers3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button8"
-        android:layout_toEndOf="@+id/editText6"
+        android:layout_alignBaseline="@+id/button9"
+        android:layout_alignBottom="@+id/button9"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/button9"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/structure_availability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText6"
-        android:layout_alignBottom="@+id/editText6"
+        android:layout_alignBaseline="@+id/Text6"
+        android:layout_alignBottom="@+id/Text6"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/editText6"
+        android:layout_toEndOf="@+id/Text6"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Availability"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/structure_numbers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button10"
         android:layout_alignBottom="@+id/button10"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/editText6"
+        android:layout_toEndOf="@+id/button10"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/structure_numbers2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/structure_numbers3"
+        android:layout_alignBaseline="@+id/button12"
+        android:layout_alignBottom="@+id/button12"
         android:layout_toEndOf="@+id/button12"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/structure_numbers3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button11"
         android:layout_alignBottom="@+id/button11"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/button12"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
 </RelativeLayout>

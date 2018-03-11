@@ -5,7 +5,7 @@
 
     <MapLot7
         android:id="@+id/ivProfileBg"
-        android:src="@drawable/Lot7"
+        android:src="@drawable/lot7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
