@@ -1,8 +1,6 @@
 package edu.csus.ecs.athena.meeseeksparking
 
-/**
- * Created by Jenny on 3/4/2018.
- */
+
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
