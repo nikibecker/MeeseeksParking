@@ -11,12 +11,12 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        button5.setOnClickListener{
+        btnParkingMap.setOnClickListener{
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
 
-        button6.setOnClickListener{
+        btnLogin.setOnClickListener{
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
