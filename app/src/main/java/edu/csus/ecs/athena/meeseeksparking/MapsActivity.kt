@@ -22,7 +22,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var myMap: GoogleMap
 
-    val a: Int = 84
+    val a: Int = 95
     val b: Int = 100
     val c: Int = 25
     val d: Int = 40
@@ -82,6 +82,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     override fun onMapReady(googleMap: GoogleMap) {
         myMap = googleMap
 
@@ -95,9 +96,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         if (a > 90 && a <= 100) {
-
             myMap.addPolygon(PolygonOptions()
+
                     .clickable(true)
+
                     .add(
                             LatLng(38.558605, -121.422440),
                             LatLng(38.558785, -121.422515),
@@ -106,7 +108,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .fillColor(0x33990000)
                     .strokeWidth(0.75F)
                     //.t
+
+
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, lot5::class.java)
+                startActivity(intent)
+
+            }
+          //  g.to(lot5:: class.java)
+
 
         } else if(a >= 0 && a <= 80) {
 
@@ -121,6 +132,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.t
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, lot5::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -137,6 +153,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.t
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, lot5::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -154,6 +175,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .fillColor(0x33990000)
                     .strokeWidth(0.75F)
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, lot7::class.java)
+                startActivity(intent)
+
+            }
 
         } else if(b >=0  && b <= 80) {
 
@@ -169,6 +195,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .fillColor(0x33009900)
                     .strokeWidth(0.75F)
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this,lot7::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -186,6 +217,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .fillColor(0x33FFFF00)
                     .strokeWidth(0.75F)
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, lot7::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -204,6 +240,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps1::class.java)
+                startActivity(intent)
+
+            }
 
         } else  if(c >= 0 && c <= 80) {
 
@@ -219,6 +260,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps1::class.java)
+                startActivity(intent)
+
+            }
 
         }
         else  if(c > 80  && c <= 90) {
@@ -235,6 +281,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps1::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -254,6 +305,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps2::class.java)
+                startActivity(intent)
+
+            }
+
 
         } else if(d >= 0 && d <= 80) {
 
@@ -271,6 +328,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps2::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -290,6 +352,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps2::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -319,6 +386,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps3::class.java)
+                startActivity(intent)
+
+            }
 
         } else if(e >= 0 && e <= 80) {
 
@@ -345,6 +417,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps3::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
@@ -373,6 +450,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
+            myMap.setOnPolygonClickListener {
+                val intent = Intent(this, ps3::class.java)
+                startActivity(intent)
+
+            }
 
         }
 
