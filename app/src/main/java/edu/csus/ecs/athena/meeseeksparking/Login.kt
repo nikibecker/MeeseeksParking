@@ -54,14 +54,10 @@ private class AsyncRunSSH : AsyncTask<String, String, String> () {
                 var session = client.startSession()
                 System.out.println("\nSession Started")
                 try {
-                    session.exec("mysql -h athena -u walle_user -p")
-                    session = client.startSession()
-                    session.exec("walle_db")
-                    session = client.startSession()
-                    session.exec("use walle")
-                    session = client.startSession()
-                    var command: Session.Command = session.exec("show tables;")
+                    //var command: Session.Command = session.exec("cd html; ls")
+                    var command: Session.Command = session.exec("mysql -h athena -u walle_user -p; walle_db; use walle; show tables;")
                     testString = IOUtils.readFully(command.getInputStream()).toString()
+                    System.out.println("Aviv: \n" + testString)
                     command.join(5, TimeUnit.SECONDS)
                 } catch (e: ConnectException) {
                     Log.e("Session.exec ConnError", e.toString())
@@ -76,7 +72,7 @@ private class AsyncRunSSH : AsyncTask<String, String, String> () {
         } catch (e: IOException) {
             Log.e("Login Error", e.toString())
         }
-        System.out.println("Aviv: \n" + testString)
+        System.out.println("Aviv2: \n" + testString)
         return testString
     }
 
