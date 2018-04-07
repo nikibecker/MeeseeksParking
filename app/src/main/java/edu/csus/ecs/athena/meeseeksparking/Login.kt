@@ -7,14 +7,23 @@ import kotlinx.android.synthetic.main.activity_login.*
 import android.os.AsyncTask
 import android.util.Log
 
-import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.common.IOUtils;
-import net.schmizz.sshj.connection.channel.direct.Session;
+import net.schmizz.sshj.SSHClient
+import net.schmizz.sshj.common.IOUtils
+import net.schmizz.sshj.connection.channel.direct.Session
 import net.schmizz.sshj.transport.TransportException
 import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 import java.io.IOException
 import java.net.ConnectException
 import java.util.concurrent.TimeUnit
+import net.schmizz.sshj.connection.channel.direct.Session.Shell
+
+import net.sf.expectit.ExpectBuilder
+import net.sf.expectit.Expect
+import net.sf.expectit.filter.Filters.removeColors
+import net.sf.expectit.filter.Filters.removeNonPrintable
+import net.sf.expectit.matcher.Matchers.contains
+import net.sf.expectit.matcher.Matchers.regexp
+
 
 var loginCred : String = "meeseeks"
 var passwordCred : String = "ynasujge"
@@ -43,23 +52,43 @@ class Login : AppCompatActivity() {
 private class AsyncRunSSH : AsyncTask<String, String, String> () {
     override fun doInBackground(vararg p0: String?): String {
         var testString : String = ""
+        Log.d("SSH", "console started")
         try {
             var client = SSHClient()
             client.addHostKeyVerifier(PromiscuousVerifier())
             client.connect(hostName, 22)
-            System.out.println("\nClient Connected")
+            Log.d("SSH", "\nClient Connected")
             client.authPassword(loginCred, passwordCred)
-
             try {
-                var session = client.startSession()
-                System.out.println("\nSession Started")
+                //var session = client.startSession()
+                val session = client.startSession()
+                Log.d("SESSION", "\nSession Started")
+                session.allocateDefaultPTY()
+                val shell = session.startShell()
+                val expect = ExpectBuilder()
+                    .withOutput(shell.getOutputStream())
+                    .withInputs(shell.getInputStream(), shell.getErrorStream())
+                    .withEchoInput(System.out)
+                    .withEchoOutput(System.err)
+                    .withInputFilters(removeColors(), removeNonPrintable())
+                    .withExceptionOnFailure()
+                    .build()
                 try {
+                    expect.sendLine("mysql -h athena -u walle_user -p")
+                    expect.expect(contains("Enter password:"))
+                    expect.sendLine("walle_db")
+                    expect.sendLine("use walle")
+                    expect.expect(contains("Database changed"))
+                    expect.sendLine("show tables;")
+                }
+                /*try {
                     //var command: Session.Command = session.exec("cd html; ls")
                     var command: Session.Command = session.exec("mysql -h athena -u walle_user -p; walle_db; use walle; show tables;")
                     testString = IOUtils.readFully(command.getInputStream()).toString()
-                    System.out.println("Aviv: \n" + testString)
+                    Log.d("SESSION","Aviv: \n" + testString)
                     command.join(5, TimeUnit.SECONDS)
-                } catch (e: ConnectException) {
+                } */
+                catch (e: ConnectException) {
                     Log.e("Session.exec ConnError", e.toString())
                 } catch (e: TransportException) {
                     Log.e("Session.exec TransError", e.toString())
