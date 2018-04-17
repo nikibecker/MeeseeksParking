@@ -21,12 +21,18 @@ import net.sf.expectit.ExpectBuilder
 import net.sf.expectit.Expect
 import net.sf.expectit.filter.Filters.removeColors
 import net.sf.expectit.filter.Filters.removeNonPrintable
+import net.sf.expectit.filter.Filters.replaceInString
 import net.sf.expectit.matcher.Matchers.contains
+import net.sf.expectit.matcher.Matchers.anyString
 import net.sf.expectit.matcher.Matchers.regexp
+//import javax.swing.text.html.HTML.Attribute.PROMPT
+//import spock.util.matcher.HamcrestSupport.expect
+
+
 
 
 var loginCred : String = "meeseeks"
-var passwordCred : String = "ynasujge"
+var passwordCred : String = "Senior_Project18"
 var hostName : String = "athena.csus.edu"
 
 class Login : AppCompatActivity() {
@@ -70,7 +76,14 @@ private class AsyncRunSSH : AsyncTask<String, String, String> () {
                     .withInputs(shell.getInputStream(), shell.getErrorStream())
                     .withEchoInput(System.out)
                     .withEchoOutput(System.err)
-                    .withInputFilters(removeColors(), removeNonPrintable())
+                    .withInputFilters(removeColors(),
+                            removeNonPrintable())
+                            //replaceInString("show tables;", ""),
+                            //replaceInString("mysql>", ""),
+                            //replaceInString("-", ""),
+                            //replaceInString("+", ""),
+                            //replaceInString("|", ", "))
+                            //replaceInString("\n", ""))
                     .withExceptionOnFailure()
                     .build()
                 try {
@@ -80,6 +93,7 @@ private class AsyncRunSSH : AsyncTask<String, String, String> () {
                     expect.sendLine("use walle")
                     expect.expect(contains("Database changed"))
                     expect.sendLine("show tables;")
+                    testString = expect.expect(contains("+")).input
                 }
                 /*try {
                     //var command: Session.Command = session.exec("cd html; ls")
