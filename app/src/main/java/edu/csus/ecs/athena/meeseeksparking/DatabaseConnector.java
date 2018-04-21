@@ -24,7 +24,6 @@ public class DatabaseConnector {
             Log.e("TAG", e.getMessage(), e);
             //throw new ClassNotFoundException("MySQL JDBC driver NOT detected in library path.", e);
         }
-        //System.out.println("MySQL JDBC driver detected in library path.");
 
         // Initialize connection object
         try {

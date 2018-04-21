@@ -7,14 +7,18 @@ import android.util.Log;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class ExecuteSQL extends AsyncTask <String, Void, Boolean> {
+        //-----------------------------------------------------------
+        //This class is for UPDATE, DELETE, & INSERT statements
+        //-----------------------------------------------------------
+public class ExecuteSQL extends AsyncTask <Object, Void, Boolean> {
 
     /*
-    Use this to Query (SELECT) the database.
-    This is NOT for delete, update, or insert
+        Creates a generic INSERT query, odd number of params must be passed (greater than 3)
+        param 1: Name of table, the rest must be of the order (col1, col2... coln, val1, val2... valn)
+
      */
     @Override
-    protected Boolean doInBackground(String... strs) {
+    protected Boolean doInBackground(Object... strs) {
 
         // Connect to database
         Connection connection = null;
@@ -39,14 +43,15 @@ public class ExecuteSQL extends AsyncTask <String, Void, Boolean> {
         catch (Exception e) {
             throw new SQLException("Failed to create connection to database.", e);
         }
-        if (connection != null)
-        {
+        if (connection != null) {
             System.out.println("Successfully created connection to database.");
 
             // Perform some SQL queries over the connection.
             try {
-                if (strs.length == 1) {
-                    PreparedStatement preparedStatement = connection.prepareStatement(strs[0]);
+                if (strs.length > 0) {
+                    PreparedStatement preparedStatement = connection.prepareStatement(strs[0].toString());
+                    for(int i = 1; i < strs.length; i++)
+                        preparedStatement.setObject(i, strs[i]);
                     preparedStatement.executeUpdate();
                 }
                 else
@@ -54,8 +59,7 @@ public class ExecuteSQL extends AsyncTask <String, Void, Boolean> {
 
                 connection.close();
             }
-            catch (java.sql.SQLException e)
-            {
+            catch (java.sql.SQLException e) {
                 throw new SQLException("Encountered an error when executing given sql statement.", e);
             }
         }

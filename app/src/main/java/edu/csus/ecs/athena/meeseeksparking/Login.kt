@@ -3,7 +3,9 @@ package edu.csus.ecs.athena.meeseeksparking
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_login.*
+import java.sql.ResultSet
 
 class Login : AppCompatActivity() {
 
@@ -17,10 +19,24 @@ class Login : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener{
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-            SQLInsert().execute("users","CSUSID","FirstName","LastName","PrivFlag","SpotPriv","Password",
-                    "987987987","Aviv","Test","0","0","Password")
+            //var temp = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)"
+            //ExecuteSQL().execute(temp, "098767890", "Test", "Me", 0, 0, "passwordTest")
+            var sqlQueryStr = "SELECT * FROM users WHERE CSUSID = ? AND Password = ? AND PrivFlag = ?"
+            var userID = findViewById <EditText> (R.id.etUserID)
+            var password = findViewById <EditText> (R.id.etPassword)
+            var querySQL = QuerySQL()
+            var results : ResultSet = querySQL.execute(sqlQueryStr,userID.text.toString(), password.text.toString(), 1)
+
+            //Checks to see if returned table is empty, if it is,
+            // it means the user either doesn't exist or doesn't have privilege
+            if(results.next()) {
+                querySQL.close()
+                val intent = Intent(this, Settings::class.java)
+                startActivity(intent)
+            }
+            else {
+                //TODO: create a pop-up to say login failed
+            }
         }
     }
 }

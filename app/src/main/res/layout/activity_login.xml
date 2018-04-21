@@ -47,7 +47,7 @@
             android:id="@+id/tvPassword"
             android:layout_width="125dp"
             android:layout_height="43dp"
-            android:layout_alignStart="@+id/tvEmail"
+            android:layout_alignStart="@+id/tvUserID"
             android:layout_centerVertical="true"
             android:text="Password:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -56,38 +56,38 @@
             tools:layout_editor_absoluteY="234dp" />
 
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/tvUserID"
             android:layout_width="95dp"
             android:layout_height="38dp"
             android:layout_above="@+id/tvPassword"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="19dp"
             android:layout_marginStart="14dp"
-            android:text="Email:"
+            android:text="User ID:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="183dp" />
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etUserID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/btnLogin"
-            android:layout_alignTop="@+id/tvEmail"
+            android:layout_alignTop="@+id/tvUserID"
             android:ems="10"
-            android:inputType="textPassword"
+            android:inputType="number"
             tools:layout_editor_absoluteX="143dp"
             tools:layout_editor_absoluteY="232dp" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/etPassword"
+            android:layout_alignStart="@+id/btnLogin"
             android:layout_centerVertical="true"
             android:ems="10"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             tools:layout_editor_absoluteX="143dp"
             tools:layout_editor_absoluteY="183dp" />
     </RelativeLayout>
