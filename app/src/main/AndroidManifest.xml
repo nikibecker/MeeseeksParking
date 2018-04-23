@@ -34,17 +34,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDoeVSdNW_OtlJPVeHraaRKxhjlf_6f3CU" />
 
-        <activity android:name=".Settings" />
+        <activity android:name=".Settings"
+            android:parentActivityName=".Overview"/>
+        <activity android:name=".parkingLotList"
+            android:parentActivityName=".Login"/>
         <activity
             android:name=".Overview"
-            android:parentActivityName=".Overview">
-
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Overview" />
-        </activity>
-        <activity android:name=".Login" />
+            android:parentActivityName=".Overview"/>
+        <activity android:name=".Login"
+            android:parentActivityName=".Overview"/>/>
         <activity
             android:name=".lot5"
             android:label="@string/title_activity_lot5"
@@ -64,7 +62,7 @@
         <activity
             android:name=".ps3"
             android:label="@string/title_activity_ps3"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
