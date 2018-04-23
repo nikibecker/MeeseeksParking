@@ -44,18 +44,6 @@
             tools:layout_editor_absoluteY="144dp" />
 
         <TextView
-            android:id="@+id/tvPassword"
-            android:layout_width="125dp"
-            android:layout_height="43dp"
-            android:layout_alignStart="@+id/tvEmail"
-            android:layout_centerVertical="true"
-            android:text="Password:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="24sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="234dp" />
-
-        <TextView
             android:id="@+id/tvEmail"
             android:layout_width="95dp"
             android:layout_height="38dp"
@@ -67,6 +55,30 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="183dp" />
+
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="125dp"
+            android:layout_height="43dp"
+            android:layout_alignStart="@+id/tvEmail"
+            android:layout_centerVertical="true"
+            android:text="Password:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="234dp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvEmail"
+            android:layout_alignBottom="@+id/tvEmail"
+            android:layout_alignStart="@+id/etPassword"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="143dp"
             tools:layout_editor_absoluteY="183dp" />
 
         <EditText
@@ -81,17 +93,7 @@
             tools:layout_editor_absoluteX="143dp"
             tools:layout_editor_absoluteY="232dp" />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvEmail"
-            android:layout_alignBottom="@+id/tvEmail"
-            android:layout_alignStart="@+id/etPassword"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="183dp" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
