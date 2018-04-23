@@ -8,14 +8,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.activity_maps.*
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.common.api.GoogleApiClient
 //import com.google.android.gms.location.LocationListener
 //import com.google.android.gms.location.LocationRequest
 //import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.*
-import java.util.*
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -25,6 +21,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var myMap2: GoogleMap
     private lateinit var myMap3: GoogleMap
     private lateinit var myMap4: GoogleMap
+
+    //False Variables to test for Parking Structure Color Representations
 
     val a: Int = 95
     val b: Int = 100
@@ -40,17 +38,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        button3.setOnClickListener{
+        // Code segments for buttons leading to Settings, Login, and Overview
+
+        btnSettings.setOnClickListener{
             val intent = Intent(this, Settings::class.java)
             startActivity(intent)
         }
 
-        button2.setOnClickListener{
+        btnLogin.setOnClickListener{
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
 
-        button4.setOnClickListener{
+        btnOverview.setOnClickListener{
             val intent = Intent(this, Overview::class.java)
             startActivity(intent)
         }
@@ -89,6 +89,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+
+        //Instantiate the Map for Google
         myMap = googleMap
         myMap1 = googleMap
         myMap2 = googleMap
@@ -97,7 +99,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // val a: Int = 80
         //val b: Int = 100
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in Sacramento State and zoom in to view the campus positions well
         val SacState = LatLng(38.5611, -121.4240)
         myMap1.addMarker(MarkerOptions().position(SacState).title("Sacramento State"))
         myMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
@@ -135,9 +137,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intentps1)
         }
 
-       // myMap.setOnPolygonClickListener(lot5,  )
 
+        /////////////////////////////////
+        //Lot Colors are determined by  /
+        //0-80% : Green                 /
+        //80-90% : Yellow               /
+        //90 - 100% : Red               /
+        /////////////////////////////////
 
+        ///////
+        //Lot 5: if statements to create Polygon and detail how occupied the lot is by color
+        ///////
 
         if (a > 90 && a <= 100) {
           var lot5 =  myMap.addPolygon(PolygonOptions()
@@ -157,13 +167,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
             )
-           // myMap1.setOnPolygonClickListener {
-             //   val intentlot5 = Intent(this, lot5::class.java)
-               // startActivity(intentlot5)
-
-            //}
-          //  g.to(lot5:: class.java)
-
 
         } else if(a >= 0 && a <= 80) {
 
@@ -178,13 +181,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.t
             )
-
-          //  myMap1.setOnPolygonClickListener {
-            //    val intentlot5 = Intent(this, lot5::class.java)
-              //  startActivity(intentlot5)
-
-            //}
-
         }
 
         else if(a > 80 && a <= 90) {
@@ -200,16 +196,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.t
             )
-           // myMap1.setOnPolygonClickListener {
-             //   val intentlot5 = Intent(this, lot5::class.java)
-               // startActivity(intentlot5)
-
-            //}
 
         }
 
 
-
+        ////////
+        //Lot 7: if statements to create Polygon and detail how occupied the lot is by color
+        ////////
         if (b > 90 && b <= 100) {
 
             myMap1.addPolygon(PolygonOptions()
@@ -225,12 +218,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
             )
 
-          /*  myMap.setOnPolygonClickListener {
-
-                val intentlot7 = Intent(this, lot7::class.java)
-                startActivity(intentlot7)
-
-            } */
 
         } else if(b >=0  && b <= 80) {
 
@@ -246,11 +233,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .fillColor(0x33009900)
                     .strokeWidth(0.75F)
             )
-          /*  myMap.setOnPolygonClickListener {
-                val intentlot7 = Intent(this,lot7::class.java)
-                startActivity(intentlot7)
-
-            } */
 
         }
 
@@ -269,14 +251,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
 
             )
-          /*  myMap.setOnPolygonClickListener {
-                val intentlot7 = Intent(this, lot7::class.java)
-                startActivity(intentlot7)
-
-            } */
 
         }
 
+        //////////////////////
+        //Parking Structure 1: if statements to create Polygon and detail how occupied the lot is by color
+        //////////////////////
 
         if (c > 90 && c <= 100) {
 
@@ -292,11 +272,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-        /*    myMap.setOnPolygonClickListener {
-                val intentps1 = Intent(this, ps1::class.java)
-                startActivity(intentps1)
-
-            } */
 
         } else  if(c >= 0 && c <= 80) {
 
@@ -312,11 +287,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-          /*  myMap.setOnPolygonClickListener {
-                val intentps1 = Intent(this, ps1::class.java)
-                startActivity(intentps1)
-
-            } */
 
         }
         else  if(c > 80  && c <= 90) {
@@ -333,13 +303,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-         /*   myMap.setOnPolygonClickListener {
-                val intentps1 = Intent(this, ps1::class.java)
-                startActivity(intentps1)
-
-            } */
 
         }
+        //////////////////////
+        //Parking Structure 2: if statements to create Polygon and detail how occupied the lot is by color
+        //////////////////////
 
         if (d > 90 && d <= 100) {
 
@@ -357,11 +325,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-        /*    myMap.setOnPolygonClickListener {
-                val intentps2 = Intent(this, ps2::class.java)
-                startActivity(intentps2)
-
-            } */
 
 
         } else if(d >= 0 && d <= 80) {
@@ -380,11 +343,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-        /*    myMap.setOnPolygonClickListener {
-                val intentps2 = Intent(this, ps2::class.java)
-                startActivity(intentps2)
-
-            } */
 
         }
 
@@ -404,14 +362,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-          /*  myMap.setOnPolygonClickListener {
-                val intentps2 = Intent(this, ps2::class.java)
-                startActivity(intentps2)
-
-            } */
 
         }
 
+        //////////////////////
+        //Parking Structure 3: if statements to create Polygon and detail how occupied the lot is by color
+        //////////////////////
 
         if (e > 90 && e <= 100) {
 
@@ -438,11 +394,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-          /*  myMap.setOnPolygonClickListener {
-                val intentps3 = Intent(this, ps3::class.java)
-                startActivity(intentps3)
-
-            } */
 
         } else if(e >= 0 && e <= 80) {
 
@@ -469,12 +420,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-         /*   myMap.setOnPolygonClickListener {
-                val intentps3 = Intent(this, ps3::class.java)
-                startActivity(intentps3)
-
-            } */
-
         }
 
         else if(e > 80 && e <= 90) {
@@ -502,12 +447,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
                     //.setTag("PL5")
             )
-         /*   myMap.setOnPolygonClickListener {
-                val intentps3 = Intent(this, ps3::class.java)
-                startActivity(intentps3)
-
-            } */
-
 
         }
 

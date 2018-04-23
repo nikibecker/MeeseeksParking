@@ -22,21 +22,21 @@ class Login : AppCompatActivity() {
             //var temp = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)"
             //ExecuteSQL().execute(temp, "098767890", "Test", "Me", 0, 0, "passwordTest")
             var sqlQueryStr = "SELECT * FROM users WHERE CSUSID = ? AND Password = ? AND PrivFlag = ?"
-            var userID = findViewById <EditText> (R.id.etUserID)
+        //    var userID = findViewById <EditText> (R.id.etUserID)
             var password = findViewById <EditText> (R.id.etPassword)
             var querySQL = QuerySQL()
-            var results : ResultSet = querySQL.execute(sqlQueryStr,userID.text.toString(), password.text.toString(), 1)
+         //   var results : ResultSet = querySQL.execute(sqlQueryStr,userID.text.toString(), password.text.toString(), 1)
 
             //Checks to see if returned table is empty, if it is,
             // it means the user either doesn't exist or doesn't have privilege
-            if(results.next()) {
+            //if(results.next()) {
                 querySQL.close()
                 val intent = Intent(this, Settings::class.java)
                 startActivity(intent)
             }
-            else {
+          //  else {
                 //TODO: create a pop-up to say login failed
             }
         }
-    }
-}
+   // }
+//}

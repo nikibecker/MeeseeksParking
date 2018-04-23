@@ -7,7 +7,7 @@
     android:paddingRight="16dp" >
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToOverview"
@@ -21,7 +21,7 @@
         android:layout_above="@+id/Text5"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/button7"
+        android:layout_toEndOf="@+id/btnBack"
         android:autoText="false"
         android:ems="10"
         android:inputType="textPersonName"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button7"
+        android:layout_below="@+id/btnBack"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Parking Lots"
@@ -43,10 +43,10 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnLot5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button9"
+        android:layout_alignEnd="@+id/btnLot7"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/Text5"
         android:layout_marginTop="13dp"
@@ -54,11 +54,11 @@
         android:text="Lot 5" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/btnLot7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button8"
+        android:layout_below="@+id/btnLot5"
         android:layout_toStartOf="@+id/structure_availability"
         android:onClick="goToActivityLot7"
         android:text="Lot 7" />
@@ -78,33 +78,33 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/btnPS1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button9"
+        android:layout_below="@+id/btnLot7"
         android:layout_marginTop="97dp"
         android:layout_toStartOf="@+id/structure_availability"
         android:onClick="goToActivityPS1"
         android:text="Structure 1" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/btnPS3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button12"
+        android:layout_below="@+id/btnPS2"
         android:layout_toStartOf="@+id/structure_numbers3"
         android:onClick="goToActivityPS3"
         android:text="Structure 3" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/btnPS2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button10"
+        android:layout_alignEnd="@+id/btnPS1"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button10"
+        android:layout_below="@+id/btnPS1"
         android:onClick="goToActivityPS2"
         android:text="Structure 2" />
 
@@ -126,10 +126,10 @@
         android:id="@+id/lot_numbers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button8"
-        android:layout_alignBottom="@+id/button8"
+        android:layout_alignBaseline="@+id/btnLot5"
+        android:layout_alignBottom="@+id/btnLot5"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/button8"
+        android:layout_toEndOf="@+id/btnLot5"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
@@ -140,10 +140,10 @@
         android:id="@+id/lot_numbers3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button9"
-        android:layout_alignBottom="@+id/button9"
+        android:layout_alignBaseline="@+id/btnLot7"
+        android:layout_alignBottom="@+id/btnLot7"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/button9"
+        android:layout_toEndOf="@+id/btnLot7"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
@@ -169,10 +169,10 @@
         android:id="@+id/structure_numbers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button10"
-        android:layout_alignBottom="@+id/button10"
+        android:layout_alignBaseline="@+id/btnPS1"
+        android:layout_alignBottom="@+id/btnPS1"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/button10"
+        android:layout_toEndOf="@+id/btnPS1"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
@@ -183,9 +183,9 @@
         android:id="@+id/structure_numbers2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button12"
-        android:layout_alignBottom="@+id/button12"
-        android:layout_toEndOf="@+id/button12"
+        android:layout_alignBaseline="@+id/btnPS2"
+        android:layout_alignBottom="@+id/btnPS2"
+        android:layout_toEndOf="@+id/btnPS2"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
@@ -196,10 +196,10 @@
         android:id="@+id/structure_numbers3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button11"
-        android:layout_alignBottom="@+id/button11"
+        android:layout_alignBaseline="@+id/btnPS3"
+        android:layout_alignBottom="@+id/btnPS3"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/button12"
+        android:layout_toEndOf="@+id/btnPS2"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Numbers"
