@@ -32,7 +32,7 @@
         <!-- Google Map API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDoeVSdNW_OtlJPVeHraaRKxhjlf_6f3CU" />
+            android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY" />
 
         <activity android:name=".Settings"
             android:parentActivityName=".Overview"/>
