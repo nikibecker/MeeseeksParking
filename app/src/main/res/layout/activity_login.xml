@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.csus.ecs.athena.meeseeksparking.Login">
+    tools:context="edu.csus.ecs.athena.meeseeksparking.Login"
+    tools:layout_editor_absoluteY="81dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/btnLogin"
@@ -44,14 +48,14 @@
             tools:layout_editor_absoluteY="144dp" />
 
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/tvUserID"
             android:layout_width="95dp"
             android:layout_height="38dp"
             android:layout_above="@+id/tvPassword"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="19dp"
             android:layout_marginStart="14dp"
-            android:text="Email:"
+            android:text="User ID"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="16dp"
@@ -61,7 +65,7 @@
             android:id="@+id/tvPassword"
             android:layout_width="125dp"
             android:layout_height="43dp"
-            android:layout_alignStart="@+id/tvEmail"
+            android:layout_alignStart="@+id/tvUserID"
             android:layout_centerVertical="true"
             android:text="Password:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -70,11 +74,11 @@
             tools:layout_editor_absoluteY="234dp" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etUserID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvEmail"
-            android:layout_alignBottom="@+id/tvEmail"
+            android:layout_alignBaseline="@+id/tvUserID"
+            android:layout_alignBottom="@+id/tvUserID"
             android:layout_alignStart="@+id/etPassword"
             android:ems="10"
             android:inputType="textEmailAddress"

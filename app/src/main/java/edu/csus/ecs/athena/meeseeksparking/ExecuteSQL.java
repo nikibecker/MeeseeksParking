@@ -12,11 +12,6 @@ import java.sql.PreparedStatement;
         //-----------------------------------------------------------
 public class ExecuteSQL extends AsyncTask <Object, Void, Boolean> {
 
-    /*
-        Creates a generic INSERT query, odd number of params must be passed (greater than 3)
-        param 1: Name of table, the rest must be of the order (col1, col2... coln, val1, val2... valn)
-
-     */
     @Override
     protected Boolean doInBackground(Object... strs) {
 

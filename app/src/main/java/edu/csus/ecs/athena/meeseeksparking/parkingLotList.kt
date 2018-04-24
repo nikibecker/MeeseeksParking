@@ -15,16 +15,11 @@ import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
 import android.widget.Toast
 
-
-
-
-
-
 class parkingLotList : AppCompatActivity() {
 
     private var tableHeadersName : Array<String> = arrayOf("Lot Name", "Floor")
     private var tableRowsPop: ArrayList<Array<String>> = ArrayList<Array<String>>()
-    private var lotNameSelected : String? = null
+    private var lotNameSelected : String? = "Aviv"
     private var lotFloorSelected : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,17 +66,28 @@ class parkingLotList : AppCompatActivity() {
         tb.setHeaderAdapter(SimpleTableHeaderAdapter(this, *tableHeadersName))
         tb.setDataAdapter(SimpleTableDataAdapter(this, tableRowsPop))
 
-        tb.addDataClickListener(TableDataClickListener (){
-            fun onDataClicked(rowIndex: Int, clickedData: Array<Object>) {
-                lotNameSelected = (clickedData as Array<String>)[0]
+        tb.addDataClickListener(CarClickListener())
+
+        /*tb.addDataClickListener(TableDataClickListener {
+            fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
+                lotNameSelected = (clickedData)[0]
                 lotFloorSelected = (clickedData)[1].toInt()
             }
-        })
+        })*/
 
         querySQL.close()
     }
 
     fun Any.toast(context: Context, duration: Int = Toast.LENGTH_LONG): Toast {
         return Toast.makeText(context, this.toString(), duration).apply { show() }
+    }
+
+    private inner class CarClickListener : TableDataClickListener<Array<String>> {
+
+        override fun onDataClicked(rowIndex: Int, clickedData : Array<String>) {
+            lotNameSelected = (clickedData)[0]
+            lotFloorSelected = (clickedData)[1].toInt()
+            lotNameSelected.toString().toast(getApplicationContext())
+        }
     }
 }
