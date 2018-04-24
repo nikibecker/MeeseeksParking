@@ -32,7 +32,9 @@
         <!-- Google Map API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY" />
+            android:value="AIzaSyDoeVSdNW_OtlJPVeHraaRKxhjlf_6f3CU"/>
+            <!-- This is Aviv's Key... android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY"
+            we need to all have the same copy of .android\debug.keystone for the key to work for all of us-->
 
         <activity android:name=".Settings"
             android:parentActivityName=".Overview"/>
