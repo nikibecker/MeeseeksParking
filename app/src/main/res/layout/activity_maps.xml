@@ -25,14 +25,14 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnLogin"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:text="Login" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnSettings"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -41,7 +41,7 @@
         android:text="Settings" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnOverview"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

@@ -7,13 +7,10 @@
     tools:context="edu.csus.ecs.athena.meeseeksparking.Login">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
             android:id="@+id/btnLogin"
@@ -47,10 +44,24 @@
             tools:layout_editor_absoluteY="144dp" />
 
         <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="95dp"
+            android:layout_height="38dp"
+            android:layout_above="@+id/tvPassword"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="19dp"
+            android:layout_marginStart="14dp"
+            android:text="Email:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="183dp" />
+
+        <TextView
             android:id="@+id/tvPassword"
             android:layout_width="125dp"
             android:layout_height="43dp"
-            android:layout_alignStart="@+id/tvUserID"
+            android:layout_alignStart="@+id/tvEmail"
             android:layout_centerVertical="true"
             android:text="Password:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -58,41 +69,31 @@
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="234dp" />
 
-        <TextView
-            android:id="@+id/tvUserID"
-            android:layout_width="95dp"
-            android:layout_height="38dp"
-            android:layout_above="@+id/tvPassword"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="19dp"
-            android:layout_marginStart="14dp"
-            android:text="User ID:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="24sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="183dp" />
-
         <EditText
-            android:id="@+id/etUserID"
+            android:id="@+id/etEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/btnLogin"
-            android:layout_alignTop="@+id/tvUserID"
+            android:layout_alignBaseline="@+id/tvEmail"
+            android:layout_alignBottom="@+id/tvEmail"
+            android:layout_alignStart="@+id/etPassword"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="textEmailAddress"
             tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="232dp" />
+            tools:layout_editor_absoluteY="183dp" />
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvPassword"
+            android:layout_alignBottom="@+id/tvPassword"
             android:layout_alignStart="@+id/btnLogin"
-            android:layout_centerVertical="true"
             android:ems="10"
             android:inputType="textPassword"
             tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="183dp" />
+            tools:layout_editor_absoluteY="232dp" />
+
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
