@@ -3,6 +3,7 @@ package edu.csus.ecs.athena.meeseeksparking
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.widget.EditText
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_maps.*
 //import com.google.android.gms.location.LocationRequest
 //import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.*
+import java.sql.ResultSet
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -89,6 +91,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+        var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName"
+        var querySQL = QuerySQL()
+        var results : ResultSet = querySQL.execute(sqlQueryStr)
+
+        val rsmd = results.getMetaData()
+        val columnsNumber = rsmd.getColumnCount()
+
+        while (results.next())
+        {
+            for (i in 1..columnsNumber)
+            {
+                if (i > 1) print(", ")
+                val columnValue = results.getString(i)
+                print(columnValue + " " + rsmd.getColumnName(i))
+            }
+            println("")
+        }
 
         //Instantiate the Map for Google
         myMap = googleMap
