@@ -7,9 +7,13 @@ import android.util.Log;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-        //-----------------------------------------------------------
-        //This class is for UPDATE, DELETE, & INSERT statements
-        //-----------------------------------------------------------
+    /*-----------------------------------------------------------
+        This class is for UPDATE, DELETE, & INSERT statements\
+
+        Example of usage:
+        String deleteSQL = "DELETE FROM parking WHERE LotName = ? AND FloorNum = ?"
+        ExecuteSQL().execute(deleteSQL,StringVar, IntVar)
+      -----------------------------------------------------------*/
 public class ExecuteSQL extends AsyncTask <Object, Void, Boolean> {
 
     @Override
