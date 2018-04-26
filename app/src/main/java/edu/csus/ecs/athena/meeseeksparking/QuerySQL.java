@@ -8,9 +8,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-        //-----------------------------------------------------------
-        //This class is for SELECT statements
-        //-----------------------------------------------------------
+    /*-----------------------------------------------------------------------
+        This class is for SELECT statements
+
+        Example of how to use in Kotlin:
+            Var sqlQueryStr = "SELECT * FROM users WHERE CSUSID = ? AND Password = ? AND PrivFlag = ?"
+            var querySQL = QuerySQL()
+            var results : ResultSet = querySQL.execute(sqlQueryStr,StringVar, IntVar, BitVar)
+            ....
+            Some Operations with results
+            ....
+            querySQL.close()    <-- dont forget this after you are done
+                                    using the results variable, but not before
+      --------------------------------------------------------------------------*/
 public class QuerySQL {
 
     private DatabaseConnector dbConn = null;

@@ -3,6 +3,7 @@ package edu.csus.ecs.athena.meeseeksparking
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.widget.EditText
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -12,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_maps.*
 //import com.google.android.gms.location.LocationRequest
 //import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.*
+import java.sql.ResultSet
+import java.util.*
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -89,6 +92,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+        var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName"
+        var querySQL = QuerySQL()
+        var results : ResultSet = querySQL.execute(sqlQueryStr)
+
+        val rsmd = results.getMetaData()
+        val columnsNumber = rsmd.getColumnCount()
+        val lotNames : MutableList<String> = ArrayList()
+        val spotCounts : MutableList<Int> = ArrayList()
+        val spotsTaken : MutableList<Int> = ArrayList()
+        val polys : MutableList<String> = ArrayList()
+
+        while (results.next())
+        {
+            lotNames.add(results.getString(1))
+            spotCounts.add(results.getInt(2))
+            spotsTaken.add(results.getInt(3))
+            val temp = results.getString(4)
+            val temp2 = temp.replace(("[^0-9 .,]+").toRegex(), "")
+            //val myList : ArrayList<String> = ArrayList<String>()
+            //val temp3 = Arrays.asList(temp2.split(","))
+            polys.add(temp2)
+            print(temp2)
+
+            /*for (i in 1..columnsNumber)
+            {
+                if (i > 1) print(", ")
+                val columnValue = results.getString(i)
+                print(columnValue + " " + rsmd.getColumnName(i))
+            }*/
+            //println("")
+        }
+        //print(polys.joinToString())
 
         //Instantiate the Map for Google
         myMap = googleMap
@@ -103,6 +138,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val SacState = LatLng(38.5611, -121.4240)
         myMap1.addMarker(MarkerOptions().position(SacState).title("Sacramento State"))
         myMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
+
+        /*
+        for ( i in lotNames) {
+            var lot5 =  myMap.addPolygon(PolygonOptions()
+
+                    .clickable(true)
+
+                    .add(
+                            LatLng(38.558605, -121.422440),
+                            LatLng(38.558785, -121.422515),
+                            LatLng(38.558897, -121.422112),
+                            LatLng(38.558716, -121.422042))
+
+                    if (a > 90 && a <= 100)
+                        .fillColor(0x33990000)
+                    else if(a >= 0 && a <= 80)
+                        .fillColor(0x33009900)
+                    else
+                        .fillColor(0x33FFFF00)
+                    .strokeWidth(0.75F)
+                    .setTag(lotNames(i))
+
+
+            )
+
+            myMap.setOnPolygonClickListener {
+               val intentlot5 = Intent(this, lot5::class.java)
+               startActivity(intentlot5)
+           }
+        }
+         */
+
 
        myMap.setOnPolygonClickListener {
            val intentlot5 = Intent(this, lot5::class.java)
@@ -194,7 +261,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             LatLng(38.558716, -121.422042))
                     .fillColor(0x33FFFF00)
                     .strokeWidth(0.75F)
-                    //.t
+                    //.
             )
 
         }

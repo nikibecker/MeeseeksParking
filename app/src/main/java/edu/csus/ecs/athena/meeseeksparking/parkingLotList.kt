@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_lot_list.*
 import java.sql.ResultSet
@@ -19,8 +20,9 @@ class parkingLotList : AppCompatActivity() {
 
     private var tableHeadersName : Array<String> = arrayOf("Lot Name", "Floor")
     private var tableRowsPop: ArrayList<Array<String>> = ArrayList<Array<String>>()
-    private var lotNameSelected : String? = "Aviv"
-    private var lotFloorSelected : Int = 0
+    private var lotNameSelected : String? = null
+    private var lotFloorSelected : Int = -1
+    private val deleteSQL : String = "DELETE FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +39,10 @@ class parkingLotList : AppCompatActivity() {
         }
 
         btnDeleteRow.setOnClickListener {
-            lotNameSelected?.toast(this)
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
+            if (lotNameSelected != null && lotFloorSelected != -1)
+                showNormalAlert()
+            else
+                "No lot/floor was selected".toast(getApplicationContext())
         }
 
         //Connects and retrieves data about all the lots/structures
@@ -68,26 +71,38 @@ class parkingLotList : AppCompatActivity() {
 
         tb.addDataClickListener(CarClickListener())
 
-        /*tb.addDataClickListener(TableDataClickListener {
-            fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
-                lotNameSelected = (clickedData)[0]
-                lotFloorSelected = (clickedData)[1].toInt()
-            }
-        })*/
-
         querySQL.close()
     }
 
-    fun Any.toast(context: Context, duration: Int = Toast.LENGTH_LONG): Toast {
+    //Creates an Alert to confirm that the user wants to delete the
+    //data from the server permanently
+    private fun showNormalAlert(){
+        val dialog = AlertDialog.Builder(this).setTitle("Delete Record").setMessage("permanently delete: \nParking Lot: " + lotNameSelected +
+                                                                                            "\nFloor: " + lotFloorSelected)
+                .setPositiveButton("Confirm", { dialog, i ->
+                    ExecuteSQL().execute(deleteSQL, lotNameSelected, lotFloorSelected)
+                    finish()
+                    startActivity(getIntent())
+                    "Record deleted".toast(this)
+                })
+                .setNegativeButton("Cancel", { dialog, i -> })
+        dialog.show()
+    }
+
+
+    private fun Any.toast(context: Context, duration: Int = Toast.LENGTH_SHORT): Toast {
         return Toast.makeText(context, this.toString(), duration).apply { show() }
     }
 
+    //Inner class that gets called when a user clicks on a row inside the tbale
+    // it saves the row's 2 datafields (lotName, floorNum) into 2 fields
     private inner class CarClickListener : TableDataClickListener<Array<String>> {
 
         override fun onDataClicked(rowIndex: Int, clickedData : Array<String>) {
             lotNameSelected = (clickedData)[0]
             lotFloorSelected = (clickedData)[1].toInt()
-            lotNameSelected.toString().toast(getApplicationContext())
+            (lotNameSelected + "\nfloor: " + lotFloorSelected.toString()).toast(getApplicationContext())
+
         }
     }
 }

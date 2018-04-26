@@ -21,24 +21,27 @@ class Login : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener{
-            //var temp = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)"
-            //ExecuteSQL().execute(temp, "098767890", "Test", "Me", 0, 0, "passwordTest")
             var sqlQueryStr = "SELECT * FROM users WHERE CSUSID = ? AND Password = ? AND PrivFlag = ?"
-            var userID = findViewById <EditText> (R.id.etUserID)
-            var password = findViewById <EditText> (R.id.etPassword)
-            var querySQL = QuerySQL()
-            var results : ResultSet = querySQL.execute(sqlQueryStr,userID.text.toString(), password.text.toString(), 1)
+            var userID = findViewById <EditText> (R.id.etUserID).text.toString()
+            var password = findViewById <EditText> (R.id.etPassword).text.toString()
 
-            //Checks to see if returned table is empty, if it is,
-            // it means the user either doesn't exist or doesn't have privilege
-            if(results.next()) {
-                querySQL.close()
-                val intent = Intent(this, parkingLotList::class.java)
-                startActivity(intent)
+            if (userID.length == 9 && userID.matches("[0-9]+".toRegex())) {
+
+                var querySQL = QuerySQL()
+                var results: ResultSet = querySQL.execute(sqlQueryStr, userID, password, 1)
+
+                //Checks to see if returned table is empty, if it is,
+                // it means the user either doesn't exist or doesn't have privilege
+                if (results.next()) {
+                    querySQL.close()
+                    val intent = Intent(this, parkingLotList::class.java)
+                    startActivity(intent)
+                } else {
+                    "Login Failed\nTry Again".toast(getApplicationContext())
+                }
             }
-            else {
-                "Login Failed\nTry Again".toast(getApplicationContext())
-            }
+            else
+                "Invalid User ID".toast(getApplicationContext())
         }
     }
 
