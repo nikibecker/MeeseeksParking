@@ -47,25 +47,9 @@
         <activity android:name=".Login"
             android:parentActivityName=".Overview"/>/>
         <activity
-            android:name=".lot5"
-            android:label="@string/title_activity_lot5"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".lot7"
-            android:label="@string/title_activity_lot7"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ps1"
-            android:label="@string/title_activity_ps1"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ps2"
-            android:label="@string/title_activity_ps2"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ps3"
-            android:label="@string/title_activity_ps3"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".LotDisplay"
+            android:parentActivityName=".LotDisplay" />
+
     </application>
 
 </manifest>

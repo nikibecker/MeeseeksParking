@@ -19,10 +19,6 @@ import java.sql.ResultSet
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var myMap: GoogleMap
-    private lateinit var myMap1: GoogleMap
-    private lateinit var myMap2: GoogleMap
-    private lateinit var myMap3: GoogleMap
-    private lateinit var myMap4: GoogleMap
 
     //False Variables to test for Parking Structure Color Representations
 
@@ -111,65 +107,37 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //Instantiate the Map for Google
         myMap = googleMap
-        myMap1 = googleMap
-        myMap2 = googleMap
-        myMap3 = googleMap
-        myMap4 = googleMap
+
         // val a: Int = 80
         //val b: Int = 100
 
         // Add a marker in Sacramento State and zoom in to view the campus positions well
         val SacState = LatLng(38.5611, -121.4240)
-        myMap1.addMarker(MarkerOptions().position(SacState).title("Sacramento State"))
-        myMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
-
-       myMap.setOnPolygonClickListener {
-           val intentlot5 = Intent(this, lot5::class.java)
-           startActivity(intentlot5)
-       }
-
-        myMap1.setOnPolygonClickListener {
-            val intentlot7 = Intent(this, lot7::class.java)
-            startActivity(intentlot7)
-        }
-
-        myMap2.setOnPolygonClickListener {
-            val intentps1 = Intent(this, ps1::class.java)
-            startActivity(intentps1)
-        }
-
-        myMap3.setOnPolygonClickListener {
-            val intentps2 = Intent(this, ps2::class.java)
-            startActivity(intentps2)
-        }
-
-        myMap4.setOnPolygonClickListener {
+        myMap.addMarker(MarkerOptions().position(SacState).title("Sacramento State"))
+        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
 
 
-            val intentps3 = Intent(this, ps3::class.java)
-            startActivity(intentps3)
+        myMap.setOnPolygonClickListener {
 
-            val intentps2 = Intent(this, ps2::class.java)
-            startActivity(intentps2)
 
-            val intentps1 = Intent(this, ps1::class.java)
-            startActivity(intentps1)
+            val LotDisplayintent = Intent(this, LotDisplay::class.java)
+            startActivity(LotDisplayintent)
         }
 
 
-        /////////////////////////////////
-        //Lot Colors are determined by  /
-        //0-80% : Green                 /
-        //80-90% : Yellow               /
-        //90 - 100% : Red               /
-        /////////////////////////////////
+        //////////////////////////////////////////////
+        //Lot Colors are determined by occupancy of  /
+        //0-80% : Green                              /
+        //80-90% : Yellow                            /
+        //90 - 100% : Red                            /
+        //////////////////////////////////////////////
 
         ///////
         //Lot 5: if statements to create Polygon and detail how occupied the lot is by color
         ///////
 
         if (a > 90 && a <= 100) {
-          var lot5 =  myMap.addPolygon(PolygonOptions()
+           myMap.addPolygon(PolygonOptions()
 
                     .clickable(true)
 
@@ -224,7 +192,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         ////////
         if (b > 90 && b <= 100) {
 
-            myMap1.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.554225, -121.418572),
@@ -240,7 +208,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         } else if(b >=0  && b <= 80) {
 
-            myMap1.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.554225, -121.418572),
@@ -257,7 +225,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         else if(b > 80  && b <= 90) {
 
-            myMap1.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.554225, -121.418572),
@@ -279,7 +247,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (c > 90 && c <= 100) {
 
-            myMap2.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.559075, -121.427242),
@@ -294,7 +262,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         } else  if(c >= 0 && c <= 80) {
 
-            myMap2.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.559075, -121.427242),
@@ -310,7 +278,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         else  if(c > 80  && c <= 90) {
 
-            myMap2.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.559075, -121.427242),
@@ -330,7 +298,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (d > 90 && d <= 100) {
 
-            myMap3.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.559409, -121.420965),
@@ -348,7 +316,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         } else if(d >= 0 && d <= 80) {
 
-            myMap3.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.559409, -121.420965),
@@ -367,7 +335,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         else if(d > 80 && d <= 90) {
 
-            myMap3.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.559409, -121.420965),
@@ -391,7 +359,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (e > 90 && e <= 100) {
 
 
-            myMap4.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.557533, -121.422433),
@@ -417,7 +385,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else if(e >= 0 && e <= 80) {
 
 
-            myMap4.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.557533, -121.422433),
@@ -444,7 +412,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         else if(e > 80 && e <= 90) {
 
 
-            myMap4.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
                     .clickable(true)
                     .add(
                             LatLng(38.557533, -121.422433),

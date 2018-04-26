@@ -14,25 +14,25 @@ class Overview : AppCompatActivity() {
         setContentView(R.layout.activity_overview)
 
         btnLot5.setOnClickListener{
-            val intent = Intent(this, lot5::class.java)
+            val intent = Intent(this, LotDisplay::class.java)
             startActivity(intent)
         }
 
         btnLot7.setOnClickListener{
-            val intent = Intent(this, lot7::class.java)
+            val intent = Intent(this, LotDisplay::class.java)
             startActivity(intent)
         }
 
         btnPS1.setOnClickListener{
-            val intent = Intent(this, ps1::class.java)
+            val intent = Intent(this, LotDisplay::class.java)
             startActivity(intent)
         }
         btnPS2.setOnClickListener{
-            val intent = Intent(this, ps2::class.java)
+            val intent = Intent(this, LotDisplay::class.java)
             startActivity(intent)
         }
         btnPS3.setOnClickListener{
-            val intent = Intent(this, ps3::class.java)
+            val intent = Intent(this, LotDisplay::class.java)
             startActivity(intent)
         }
 

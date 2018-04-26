@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation files('mysql-connector-java-5.1.46-bin/mysql-connector-java-5.1.46-bin.jar')
     implementation 'de.codecrafters.tableview:tableview:2.2.0'
+    implementation 'com.android.support:gridlayout-v7:26.1.0'
 }
