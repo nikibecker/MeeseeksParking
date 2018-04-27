@@ -32,20 +32,26 @@
         <!-- Google Map API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY"/>
-            <!-- This is Aviv's Key... android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY"
+            android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY" />
+        <!--
+            This is Aviv's Key... android:value="AIzaSyBZzfnOgSxPxgzDok5f8c0wvH7gCucFcZY"
             we need to all have the same copy of .android\debug.keystone for the key to work for all of us
-            old key = AIzaSyDoeVSdNW_OtlJPVeHraaRKxhjlf_6f3CU -->
+            old key = AIzaSyDoeVSdNW_OtlJPVeHraaRKxhjlf_6f3CU
+        -->
 
-        <activity android:name=".Settings"
-            android:parentActivityName=".Overview"/>
-        <activity android:name=".parkingLotList"
-            android:parentActivityName=".Login"/>
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".Overview" />
+        <activity
+            android:name=".parkingLotList"
+            android:parentActivityName=".Login" />
         <activity
             android:name=".Overview"
-            android:parentActivityName=".Overview"/>
-        <activity android:name=".Login"
-            android:parentActivityName=".Overview"/>/>
+            android:parentActivityName=".Overview" />
+        <activity
+            android:name=".Login"
+            android:parentActivityName=".Overview" />
+        />
         <activity
             android:name=".lot5"
             android:label="@string/title_activity_lot5"

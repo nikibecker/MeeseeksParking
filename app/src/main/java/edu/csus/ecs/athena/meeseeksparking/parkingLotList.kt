@@ -14,7 +14,9 @@ import de.codecrafters.tableview.TableView
 import de.codecrafters.tableview.listeners.TableDataClickListener
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
-import android.widget.Toast
+import android.view.View
+import android.widget.*
+
 
 class parkingLotList : AppCompatActivity() {
 
@@ -23,26 +25,24 @@ class parkingLotList : AppCompatActivity() {
     private var lotNameSelected : String? = null
     private var lotFloorSelected : Int = -1
     private val deleteSQL : String = "DELETE FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
+    private var choice : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lot_list)
 
-        btnInsertScreen.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-        }
+        //Creates the Drop Down menu
+        val dropDown = findViewById <Spinner> (R.id.ddEditChoice)
+        val adapter = ArrayAdapter.createFromResource(this, R.array.edit_choice_array, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dropDown.adapter = adapter
 
-        btnUpdateScreen.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-        }
+        dropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                choice = position
+            }
 
-        btnDeleteRow.setOnClickListener {
-            if (lotNameSelected != null && lotFloorSelected != -1)
-                showNormalAlert()
-            else
-                "No lot/floor was selected".toast(getApplicationContext())
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         //Connects and retrieves data about all the lots/structures
@@ -72,11 +72,27 @@ class parkingLotList : AppCompatActivity() {
         tb.addDataClickListener(CarClickListener())
 
         querySQL.close()
+
+        //Creates an on click listner for the Go button
+        btnGo.setOnClickListener {
+            if (lotNameSelected != null && lotFloorSelected != -1) {
+                when(choice) {
+                    0 -> deleteLot()
+                    /*1 ->
+                    2 ->
+                    3 ->
+                    4 ->
+                     */
+                }
+            }
+            else
+                "No lot/floor was selected".toast(getApplicationContext())
+        }
     }
 
     //Creates an Alert to confirm that the user wants to delete the
     //data from the server permanently
-    private fun showNormalAlert(){
+    private fun deleteLot(){
         val dialog = AlertDialog.Builder(this).setTitle("Delete Record").setMessage("permanently delete: \nParking Lot: " + lotNameSelected +
                                                                                             "\nFloor: " + lotFloorSelected)
                 .setPositiveButton("Confirm", { dialog, i ->
@@ -98,11 +114,12 @@ class parkingLotList : AppCompatActivity() {
     // it saves the row's 2 datafields (lotName, floorNum) into 2 fields
     private inner class CarClickListener : TableDataClickListener<Array<String>> {
 
-        override fun onDataClicked(rowIndex: Int, clickedData : Array<String>) {
+        override fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
             lotNameSelected = (clickedData)[0]
             lotFloorSelected = (clickedData)[1].toInt()
-            (lotNameSelected + "\nfloor: " + lotFloorSelected.toString()).toast(getApplicationContext())
-
+            //(lotNameSelected + "\nfloor: " + lotFloorSelected.toString()).toast(getApplicationContext())
+            findViewById <TextView> (R.id.tvLotName).text = lotNameSelected
+            findViewById <TextView> (R.id.tvFloorNum).text = lotFloorSelected.toString()
         }
     }
 }
