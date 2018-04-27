@@ -45,6 +45,43 @@ class parkingLotList : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
+        //Class function to retrieve from database and populate table
+        populateTable()
+
+        //Creates an on click listner for the Go button
+        btnGo.setOnClickListener {
+            if (choice == 2) {
+                val intentDelete = Intent(this, CreateLotFloors::class.java)
+                startActivity(intentDelete)
+            }
+            else if (lotNameSelected != null && lotFloorSelected != -1) {
+                when(choice) {
+                    //Delete Lot
+                    0 -> deleteLot()
+                    /*
+                    //Update Lot
+                    1 ->
+                    //Edit Spots
+                    3 ->
+                    //Insert Spots
+                    4 ->
+                     */
+                }
+            }
+            else
+                "No lot/floor was selected".toast(getApplicationContext())
+        }
+    }
+
+    //refreshes table when activity is returned to
+    // after a Back button is pressed from another activity
+    override fun onResume() {
+        super.onResume()
+        populateTable()
+    }
+
+    //Retreives data from database and populates the tables
+    private fun populateTable () {
         //Connects and retrieves data about all the lots/structures
         var sqlQueryStr = "SELECT LotName, FloorNum FROM parkinglot"
         var querySQL = QuerySQL()
@@ -72,22 +109,6 @@ class parkingLotList : AppCompatActivity() {
         tb.addDataClickListener(CarClickListener())
 
         querySQL.close()
-
-        //Creates an on click listner for the Go button
-        btnGo.setOnClickListener {
-            if (lotNameSelected != null && lotFloorSelected != -1) {
-                when(choice) {
-                    0 -> deleteLot()
-                    /*1 ->
-                    2 ->
-                    3 ->
-                    4 ->
-                     */
-                }
-            }
-            else
-                "No lot/floor was selected".toast(getApplicationContext())
-        }
     }
 
     //Creates an Alert to confirm that the user wants to delete the
@@ -98,7 +119,7 @@ class parkingLotList : AppCompatActivity() {
                 .setPositiveButton("Confirm", { dialog, i ->
                     ExecuteSQL().execute(deleteSQL, lotNameSelected, lotFloorSelected)
                     finish()
-                    startActivity(getIntent())
+                    startActivity(intent)//getIntent())
                     "Record deleted".toast(this)
                 })
                 .setNegativeButton("Cancel", { dialog, i -> })

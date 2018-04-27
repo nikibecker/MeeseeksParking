@@ -53,6 +53,9 @@
             android:parentActivityName=".Overview" />
         />
         <activity
+            android:name=".CreateLotFloors"
+            android:parentActivityName=".parkingLotList"/>
+        <activity
             android:name=".lot5"
             android:label="@string/title_activity_lot5"
             android:theme="@style/AppTheme.NoActionBar" />
