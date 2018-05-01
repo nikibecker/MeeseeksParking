@@ -4,42 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.csus.ecs.athena.meeseeksparking.parkingLotList">
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    tools:context="edu.csus.ecs.athena.meeseeksparking.parkingLotList"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
-        android:id="@+id/btnDeleteRow"
+        android:id="@+id/btnGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="Delete"
+        android:text="Go"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnUpdateScreen"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/ddEditChoice"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout2" />
 
-    <Button
-        android:id="@+id/btnInsertScreen"
+    <TextView
+        android:id="@+id/tvLotNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="Insert"
-        app:layout_constraintEnd_toStartOf="@+id/btnUpdateScreen"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:layout_marginEnd="4dp"
+        android:text="Lot Name:"
+        app:layout_constraintEnd_toStartOf="@+id/tvLotName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout2" />
 
-    <Button
-        android:id="@+id/btnUpdateScreen"
+    <TextView
+        android:id="@+id/tvLotName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Update"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeleteRow"
-        app:layout_constraintStart_toEndOf="@+id/btnInsertScreen"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="94dp"
+        android:text="N/A"
+        app:layout_constraintEnd_toStartOf="@+id/ddEditChoice"
+        app:layout_constraintStart_toEndOf="@+id/tvLotNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout2" />
+
+    <TextView
+        android:id="@+id/tvFloorLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Floor Num:"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFloorNum"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout2" />
+
+    <TextView
+        android:id="@+id/tvFloorNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="N/A"
+        app:layout_constraintStart_toEndOf="@+id/tvFloorLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvLotName" />
+
+    <Spinner
+        android:id="@+id/ddEditChoice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/spinner_border"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGo"
+        app:layout_constraintEnd_toStartOf="@+id/btnGo"
+        app:layout_constraintStart_toEndOf="@+id/tvLotName"
+        app:layout_constraintTop_toTopOf="@+id/btnGo" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,5 +90,4 @@
         </de.codecrafters.tableview.TableView>
 
     </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>
