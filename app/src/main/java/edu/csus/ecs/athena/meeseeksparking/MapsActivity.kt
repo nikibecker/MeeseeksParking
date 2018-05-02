@@ -92,13 +92,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
-        //Niki changes from here...
+        // Get data from database and put data into data structures.
         var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr)
 
-        val rsmd = results.getMetaData()
-        //val columnsNumber = rsmd.getColumnCount()
         val lotNames : MutableList<String> = ArrayList()
         val spotCounts : MutableList<Int> = ArrayList()
         val spotsTaken : MutableList<Int> = ArrayList()
@@ -110,23 +108,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             spotCounts.add(results.getInt(2))
             spotsTaken.add(results.getInt(3))
             val temp = results.getString(4)
-            val temp2 = temp.replace(("[^0-9 .,]").toRegex(), "")
-            //val myList : ArrayList<String> = ArrayList<String>()
-            //val temp3 = Arrays.asList(temp2.split(","))
+            val temp2 = temp.replace(("[^0-9 .,-]").toRegex(), "")
             polys.add(temp2)
-            //System.out.println(temp2)
-
-            /*for (i in 1..columnsNumber)
-            {
-                if (i > 1) print(", ")
-                val columnValue = results.getString(i)
-                print(columnValue + " " + rsmd.getColumnName(i))
-            }*/
-            //println("")
         }
-        //print(polys.joinToString())
         querySQL.close()
-        //Niki changes stop here. look further down for more.
 
         //Instantiate the Map for Google
         myMap = googleMap
@@ -134,8 +119,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         myMap2 = googleMap
         myMap3 = googleMap
         myMap4 = googleMap
-        // val a: Int = 80
-        //val b: Int = 100
 
         // Add a marker in Sacramento State and zoom in to view the campus positions well
         val SacState = LatLng(38.5611, -121.4240)
@@ -145,26 +128,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //Start code for dynamic polygon creation
         val map = mutableMapOf<String, Int>()
         var i = 0
-        for (name in lotNames) { //temporary remove for testing
 
-            //val x : MutableList<Int> = ArrayList()
-            //val y : MutableList<Int> = ArrayList()
+        for (name in lotNames) {
             val xy : List<String> = polys.get(i).split(",")
             val latLongs : MutableList<LatLng> = ArrayList()
-            //var j = 0
-            //System.out.println("BEGIN PUTTING COORDS INTO LATLNG")
             for (xys in xy) {
-                //val temp = xys
-                //x.add(temp.substringBefore(" ").toDouble())
-                //y.add(temp.substringAfter(" ").toDouble())
-                //System.out.println(xys)
                 val x = xys.substringBefore(" ").toDouble()
                 val y = xys.substringAfter(" ").toDouble()
                 latLongs.add(LatLng(x, y))
-                //j.inc()
             }
-            //val latLongFinal : Set<LatLng> = latLongs.toSet()
-            //System.out.println(latLongs)
             var color = 0x33FFFF00
             val a = spotsTaken.get(i)/spotCounts.get(i)
             if (a > .90 && a <= 1.00)
@@ -179,7 +151,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 startActivity(intentlot5)
             }
 
-            val addPolygon = myMap.addPolygon(PolygonOptions()
+            myMap.addPolygon(PolygonOptions()
 
                     .clickable(true)
                     .addAll(latLongs)
@@ -187,8 +159,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .strokeWidth(0.75F)
             )
             i.inc()
-        } //temporary remove for testing
-        //end dynamic creation
+        }
 
         /*
         myMap.setOnPolygonClickListener {
