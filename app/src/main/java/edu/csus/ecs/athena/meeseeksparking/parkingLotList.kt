@@ -14,7 +14,9 @@ import de.codecrafters.tableview.TableView
 import de.codecrafters.tableview.listeners.TableDataClickListener
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
-import android.widget.Toast
+import android.view.View
+import android.widget.*
+
 
 class parkingLotList : AppCompatActivity() {
 
@@ -23,28 +25,63 @@ class parkingLotList : AppCompatActivity() {
     private var lotNameSelected : String? = null
     private var lotFloorSelected : Int = -1
     private val deleteSQL : String = "DELETE FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
+    private var choice : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lot_list)
 
-        btnInsertScreen.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
+        //Creates the Drop Down menu
+        val dropDown = findViewById <Spinner> (R.id.ddEditChoice)
+        val adapter = ArrayAdapter.createFromResource(this, R.array.edit_choice_array, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dropDown.adapter = adapter
+
+        dropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                choice = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        btnUpdateScreen.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-        }
+        //Class function to retrieve from database and populate table
+        populateTable()
 
-        btnDeleteRow.setOnClickListener {
-            if (lotNameSelected != null && lotFloorSelected != -1)
-                showNormalAlert()
+        //Creates an on click listner for the Go button
+        btnGo.setOnClickListener {
+            if (choice == 2) {
+                val intentDelete = Intent(this, CreateLotFloors::class.java)
+                startActivity(intentDelete)
+            }
+            else if (lotNameSelected != null && lotFloorSelected != -1) {
+                when(choice) {
+                    //Delete Lot
+                    0 -> deleteLot()
+                    /*
+                    //Update Lot
+                    1 ->
+                    //Edit Spots
+                    3 ->
+                    //Insert Spots
+                    4 ->
+                     */
+                }
+            }
             else
                 "No lot/floor was selected".toast(getApplicationContext())
         }
+    }
 
+    //refreshes table when activity is returned to
+    // after a Back button is pressed from another activity
+    override fun onResume() {
+        super.onResume()
+        populateTable()
+    }
+
+    //Retreives data from database and populates the tables
+    private fun populateTable () {
         //Connects and retrieves data about all the lots/structures
         var sqlQueryStr = "SELECT LotName, FloorNum FROM parkinglot"
         var querySQL = QuerySQL()
@@ -76,13 +113,13 @@ class parkingLotList : AppCompatActivity() {
 
     //Creates an Alert to confirm that the user wants to delete the
     //data from the server permanently
-    private fun showNormalAlert(){
+    private fun deleteLot(){
         val dialog = AlertDialog.Builder(this).setTitle("Delete Record").setMessage("permanently delete: \nParking Lot: " + lotNameSelected +
                                                                                             "\nFloor: " + lotFloorSelected)
                 .setPositiveButton("Confirm", { dialog, i ->
                     ExecuteSQL().execute(deleteSQL, lotNameSelected, lotFloorSelected)
                     finish()
-                    startActivity(getIntent())
+                    startActivity(intent)//getIntent())
                     "Record deleted".toast(this)
                 })
                 .setNegativeButton("Cancel", { dialog, i -> })
@@ -98,11 +135,12 @@ class parkingLotList : AppCompatActivity() {
     // it saves the row's 2 datafields (lotName, floorNum) into 2 fields
     private inner class CarClickListener : TableDataClickListener<Array<String>> {
 
-        override fun onDataClicked(rowIndex: Int, clickedData : Array<String>) {
+        override fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
             lotNameSelected = (clickedData)[0]
             lotFloorSelected = (clickedData)[1].toInt()
-            (lotNameSelected + "\nfloor: " + lotFloorSelected.toString()).toast(getApplicationContext())
-
+            //(lotNameSelected + "\nfloor: " + lotFloorSelected.toString()).toast(getApplicationContext())
+            findViewById <TextView> (R.id.tvLotName).text = lotNameSelected
+            findViewById <TextView> (R.id.tvFloorNum).text = lotFloorSelected.toString()
         }
     }
 }

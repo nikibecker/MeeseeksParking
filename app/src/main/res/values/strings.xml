@@ -106,4 +106,17 @@
     <string name="title_activity_ps1">PS1</string>
     <string name="title_activity_ps2">ps2</string>
     <string name="title_activity_ps3">ps3</string>
+    <string name="title_activity_delete_me">DeleteME</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string-array name="edit_choice_array">
+        <item>Delete Lot</item>
+        <item>Update Lot</item>
+        <item>Insert Lot</item>
+        <item>Edit Spots</item>
+        <item>Insert Spots</item>
+    </string-array>
 </resources>
