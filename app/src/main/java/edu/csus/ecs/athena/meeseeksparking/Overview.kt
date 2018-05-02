@@ -4,8 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
 import de.codecrafters.tableview.TableView
 import de.codecrafters.tableview.listeners.TableDataClickListener
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter

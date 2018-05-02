@@ -158,7 +158,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .fillColor(color)
                     .strokeWidth(0.75F)
             )
-            i.inc()
+            i++
         }
 
         /*
