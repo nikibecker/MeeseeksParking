@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_maps.*
 //import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.*
 import java.sql.ResultSet
+import java.util.*
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -91,23 +92,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+        // Get data from database and put data into data structures.
         var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr)
 
-        val rsmd = results.getMetaData()
-        val columnsNumber = rsmd.getColumnCount()
+        val lotNames : MutableList<String> = ArrayList()
+        val spotCounts : MutableList<Int> = ArrayList()
+        val spotsTaken : MutableList<Int> = ArrayList()
+        val polys : MutableList<String> = ArrayList()
 
         while (results.next())
         {
-            for (i in 1..columnsNumber)
-            {
-                if (i > 1) print(", ")
-                val columnValue = results.getString(i)
-                print(columnValue + " " + rsmd.getColumnName(i))
-            }
-            println("")
+            lotNames.add(results.getString(1))
+            spotCounts.add(results.getInt(2))
+            spotsTaken.add(results.getInt(3))
+            val temp = results.getString(4)
+            val temp2 = temp.replace(("[^0-9 .,-]").toRegex(), "")
+            polys.add(temp2)
         }
+        querySQL.close()
 
         //Instantiate the Map for Google
         myMap = googleMap
@@ -115,18 +119,53 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         myMap2 = googleMap
         myMap3 = googleMap
         myMap4 = googleMap
-        // val a: Int = 80
-        //val b: Int = 100
 
         // Add a marker in Sacramento State and zoom in to view the campus positions well
         val SacState = LatLng(38.5611, -121.4240)
         myMap1.addMarker(MarkerOptions().position(SacState).title("Sacramento State"))
         myMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
 
-       myMap.setOnPolygonClickListener {
+        //Start code for dynamic polygon creation
+        val map = mutableMapOf<String, Int>()
+        var i = 0
+
+        for (name in lotNames) {
+            val xy : List<String> = polys.get(i).split(",")
+            val latLongs : MutableList<LatLng> = ArrayList()
+            for (xys in xy) {
+                val x = xys.substringBefore(" ").toDouble()
+                val y = xys.substringAfter(" ").toDouble()
+                latLongs.add(LatLng(x, y))
+            }
+            var color = 0x33FFFF00
+            val a = spotsTaken.get(i)/spotCounts.get(i)
+            if (a > .90 && a <= 1.00)
+                    color = 0x33990000
+            else if(a >= 0 && a <= .80)
+                    color = 0x33009900
+            else
+                    color = 0x33FFFF00
+
+            myMap.setOnPolygonClickListener {
+                val intentlot5 = Intent(this, lot5::class.java)
+                startActivity(intentlot5)
+            }
+
+            myMap.addPolygon(PolygonOptions()
+
+                    .clickable(true)
+                    .addAll(latLongs)
+                    .fillColor(color)
+                    .strokeWidth(0.75F)
+            )
+            i++
+        }
+
+        /*
+        myMap.setOnPolygonClickListener {
            val intentlot5 = Intent(this, lot5::class.java)
            startActivity(intentlot5)
-       }
+        }
 
         myMap1.setOnPolygonClickListener {
             val intentlot7 = Intent(this, lot7::class.java)
@@ -213,7 +252,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             LatLng(38.558716, -121.422042))
                     .fillColor(0x33FFFF00)
                     .strokeWidth(0.75F)
-                    //.t
+                    //.
             )
 
         }
@@ -467,7 +506,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     //.setTag("PL5")
             )
 
-        }
+        }*/
 
 
     }
