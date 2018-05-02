@@ -92,6 +92,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+        //Niki changes from here...
         var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr)
@@ -109,11 +110,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             spotCounts.add(results.getInt(2))
             spotsTaken.add(results.getInt(3))
             val temp = results.getString(4)
-            val temp2 = temp.replace(("[^0-9 .,]+").toRegex(), "")
+            val temp2 = temp.replace(("[^0-9 .,]").toRegex(), "")
             //val myList : ArrayList<String> = ArrayList<String>()
             //val temp3 = Arrays.asList(temp2.split(","))
             polys.add(temp2)
-            print(temp2)
+            System.out.println(temp2)
 
             /*for (i in 1..columnsNumber)
             {
@@ -124,6 +125,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             //println("")
         }
         //print(polys.joinToString())
+        //Niki changes stop here. look further down for more.
 
         //Instantiate the Map for Google
         myMap = googleMap
@@ -139,43 +141,57 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         myMap1.addMarker(MarkerOptions().position(SacState).title("Sacramento State"))
         myMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
 
-        /*
-        for ( i in lotNames) {
-            var lot5 =  myMap.addPolygon(PolygonOptions()
+        //Start code for dynamic polygon creation
+        val map = mutableMapOf<String, Int>()
+        val i = 0
+        //for (name in lotNames) { //temporary remove for testing
+
+            //val x : MutableList<Int> = ArrayList()
+            //val y : MutableList<Int> = ArrayList()
+            val xy : List<String> = polys.get(i).split(", ")
+            val latLongs : MutableList<LatLng> = ArrayList()
+            val j = 0
+            for (ll in xy) {
+                val temp = xy.get(j)
+                //x.add(temp.substringBefore(" ").toDouble())
+                //y.add(temp.substringAfter(" ").toDouble())
+                val x = temp.substringBefore(" ").toDouble()
+                val y = temp.substringAfter(" ").toDouble()
+                latLongs.add(LatLng(x, y))
+                j.inc()
+            }
+            val latLongFinal : Set<LatLng> = latLongs.toSet()
+            var color = 0x33FFFF00
+            val a = spotsTaken.get(i)/spotCounts.get(i)
+            if (a > .90 && a <= 1.00)
+                    color = 0x33990000
+            else if(a >= 0 && a <= .80)
+                    color = 0x33009900
+            else
+                    color = 0x33FFFF00
+
+            /*myMap.setOnPolygonClickListener {
+                val intentlot5 = Intent(this, lot5::class.java)
+                startActivity(intentlot5)
+            }*/
+
+            myMap.addPolygon(PolygonOptions()
 
                     .clickable(true)
-
-                    .add(
-                            LatLng(38.558605, -121.422440),
-                            LatLng(38.558785, -121.422515),
-                            LatLng(38.558897, -121.422112),
-                            LatLng(38.558716, -121.422042))
-
-                    if (a > 90 && a <= 100)
-                        .fillColor(0x33990000)
-                    else if(a >= 0 && a <= 80)
-                        .fillColor(0x33009900)
-                    else
-                        .fillColor(0x33FFFF00)
+                    .addAll(latLongs)
+                    .fillColor(color)
                     .strokeWidth(0.75F)
-                    .setTag(lotNames(i))
-
-
+                    .zIndex(i.toFloat())
             )
+            i.inc()
+        //} //temporary remove for testing
+        //end dynamic creation
 
-            myMap.setOnPolygonClickListener {
-               val intentlot5 = Intent(this, lot5::class.java)
-               startActivity(intentlot5)
-           }
-        }
-         */
-
-
-       myMap.setOnPolygonClickListener {
+        /*myMap.setOnPolygonClickListener {
            val intentlot5 = Intent(this, lot5::class.java)
            startActivity(intentlot5)
-       }
-
+        }*/
+        /*
         myMap1.setOnPolygonClickListener {
             val intentlot7 = Intent(this, lot7::class.java)
             startActivity(intentlot7)
@@ -515,7 +531,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     //.setTag("PL5")
             )
 
-        }
+        }*/
 
 
     }
