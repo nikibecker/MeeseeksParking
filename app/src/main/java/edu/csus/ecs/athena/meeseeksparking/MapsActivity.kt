@@ -98,7 +98,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var results : ResultSet = querySQL.execute(sqlQueryStr)
 
         val rsmd = results.getMetaData()
-        val columnsNumber = rsmd.getColumnCount()
+        //val columnsNumber = rsmd.getColumnCount()
         val lotNames : MutableList<String> = ArrayList()
         val spotCounts : MutableList<Int> = ArrayList()
         val spotsTaken : MutableList<Int> = ArrayList()
@@ -114,7 +114,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             //val myList : ArrayList<String> = ArrayList<String>()
             //val temp3 = Arrays.asList(temp2.split(","))
             polys.add(temp2)
-            System.out.println(temp2)
+            //System.out.println(temp2)
 
             /*for (i in 1..columnsNumber)
             {
@@ -125,6 +125,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             //println("")
         }
         //print(polys.joinToString())
+        querySQL.close()
         //Niki changes stop here. look further down for more.
 
         //Instantiate the Map for Google
@@ -143,24 +144,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //Start code for dynamic polygon creation
         val map = mutableMapOf<String, Int>()
-        val i = 0
-        //for (name in lotNames) { //temporary remove for testing
+        var i = 0
+        for (name in lotNames) { //temporary remove for testing
 
             //val x : MutableList<Int> = ArrayList()
             //val y : MutableList<Int> = ArrayList()
-            val xy : List<String> = polys.get(i).split(", ")
+            val xy : List<String> = polys.get(i).split(",")
             val latLongs : MutableList<LatLng> = ArrayList()
-            val j = 0
-            for (ll in xy) {
-                val temp = xy.get(j)
+            //var j = 0
+            //System.out.println("BEGIN PUTTING COORDS INTO LATLNG")
+            for (xys in xy) {
+                //val temp = xys
                 //x.add(temp.substringBefore(" ").toDouble())
                 //y.add(temp.substringAfter(" ").toDouble())
-                val x = temp.substringBefore(" ").toDouble()
-                val y = temp.substringAfter(" ").toDouble()
+                //System.out.println(xys)
+                val x = xys.substringBefore(" ").toDouble()
+                val y = xys.substringAfter(" ").toDouble()
                 latLongs.add(LatLng(x, y))
-                j.inc()
+                //j.inc()
             }
-            val latLongFinal : Set<LatLng> = latLongs.toSet()
+            //val latLongFinal : Set<LatLng> = latLongs.toSet()
+            //System.out.println(latLongs)
             var color = 0x33FFFF00
             val a = spotsTaken.get(i)/spotCounts.get(i)
             if (a > .90 && a <= 1.00)
@@ -170,28 +174,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else
                     color = 0x33FFFF00
 
-            /*myMap.setOnPolygonClickListener {
+            myMap.setOnPolygonClickListener {
                 val intentlot5 = Intent(this, lot5::class.java)
                 startActivity(intentlot5)
-            }*/
+            }
 
-            myMap.addPolygon(PolygonOptions()
+            val addPolygon = myMap.addPolygon(PolygonOptions()
 
                     .clickable(true)
                     .addAll(latLongs)
                     .fillColor(color)
                     .strokeWidth(0.75F)
-                    .zIndex(i.toFloat())
             )
             i.inc()
-        //} //temporary remove for testing
+        } //temporary remove for testing
         //end dynamic creation
 
-        /*myMap.setOnPolygonClickListener {
+        /*
+        myMap.setOnPolygonClickListener {
            val intentlot5 = Intent(this, lot5::class.java)
            startActivity(intentlot5)
-        }*/
-        /*
+        }
+
         myMap1.setOnPolygonClickListener {
             val intentlot7 = Intent(this, lot7::class.java)
             startActivity(intentlot7)
