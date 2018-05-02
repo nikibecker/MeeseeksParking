@@ -41,16 +41,16 @@
 
         <activity
             android:name=".Settings"
-            android:parentActivityName=".Overview" />
+            android:parentActivityName=".MapsActivity" />
         <activity
             android:name=".parkingLotList"
             android:parentActivityName=".Login" />
         <activity
             android:name=".Overview"
-            android:parentActivityName=".Overview" />
+            android:parentActivityName=".MapsActivity" />
         <activity
             android:name=".Login"
-            android:parentActivityName=".Overview" />
+            android:parentActivityName=".MapsActivity" />
         />
         <activity
             android:name=".CreateLotFloors"

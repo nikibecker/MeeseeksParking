@@ -106,7 +106,7 @@ class parkingLotList : AppCompatActivity() {
         tb.setHeaderAdapter(SimpleTableHeaderAdapter(this, *tableHeadersName))
         tb.setDataAdapter(SimpleTableDataAdapter(this, tableRowsPop))
 
-        tb.addDataClickListener(CarClickListener())
+        tb.addDataClickListener(rowClickListener())
 
         querySQL.close()
     }
@@ -133,7 +133,7 @@ class parkingLotList : AppCompatActivity() {
 
     //Inner class that gets called when a user clicks on a row inside the tbale
     // it saves the row's 2 datafields (lotName, floorNum) into 2 fields
-    private inner class CarClickListener : TableDataClickListener<Array<String>> {
+    private inner class rowClickListener : TableDataClickListener<Array<String>> {
 
         override fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
             lotNameSelected = (clickedData)[0]
