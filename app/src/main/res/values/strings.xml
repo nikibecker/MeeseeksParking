@@ -8,6 +8,7 @@
     <string name="Parking_Structure_1">Map</string>
     <string name="Parking_Structure_2">Map</string>
     <string name="Parking_Structure_3">Map</string>
+    <string name="LotDisplay">DynamicScrollView</string>
 
     <string name="title_activity_lot5">Lot5</string>
     <string name="dummy_button">Dummy Button</string>
