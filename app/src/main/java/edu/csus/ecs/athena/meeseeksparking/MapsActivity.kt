@@ -147,7 +147,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     color = 0x33FFFF00
 
             myMap.setOnPolygonClickListener {
-                val intentlot5 = Intent(this, lot5::class.java)
+                val intentlot5 = Intent(this, LotDisplay::class.java)
                 startActivity(intentlot5)
             }
 
