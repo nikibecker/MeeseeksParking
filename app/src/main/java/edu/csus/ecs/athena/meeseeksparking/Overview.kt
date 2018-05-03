@@ -11,6 +11,9 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
 import kotlinx.android.synthetic.main.activity_overview.*
 import java.sql.ResultSet
 import java.util.ArrayList
+import android.support.v4.content.ContextCompat.startActivity
+
+
 
 
 class Overview : AppCompatActivity() {
@@ -25,7 +28,6 @@ class Overview : AppCompatActivity() {
         setContentView(R.layout.activity_overview)
 
         populateTable()
-
     }
 
     //Retreives data from database and populates the tables
@@ -66,8 +68,14 @@ class Overview : AppCompatActivity() {
         override fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
             lotNameSelected = (clickedData)[0]
             lotFloorSelected = (clickedData)[1].toInt()
-            //val intentDelete = Intent(this, CreateLotFloors::class.java)
-            //startActivity(intentDelete)
+            var intentLotDisplay = Intent(applicationContext, LotDisplay::class.java)
+            //val extras = Bundle()
+            //extras.putString("lotNameData", lotNameSelected)
+            //extras.putString("floorNumData", lotFloorSelected.toString())
+            //intentLotDisplay.putExtras(extras)
+            intentLotDisplay.putExtra("lotNameData", lotNameSelected)
+            intentLotDisplay.putExtra("floorNumData", lotFloorSelected)
+            startActivity(intentLotDisplay)
         }
     }
 }
