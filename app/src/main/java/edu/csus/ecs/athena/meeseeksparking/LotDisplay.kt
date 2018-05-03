@@ -37,7 +37,6 @@ class LotDisplay : AppCompatActivity() {
         val background = Canvass(this)
         scrollyBoi.addView(background)
     }
-
     inner class Canvass(context: Context) : View(context) {
 
         //val bmp = BitmapFactory.decodeResource(resources, R.mipmap.lot3)
@@ -68,14 +67,14 @@ class LotDisplay : AppCompatActivity() {
 
             canvas.drawBitmap(bmp,0f,0f, null)
 
-            var sqlQueryPoly = "SELECT Left, Right, Top, Bottom, DegRotation, Available FROM parkingspot WHERE LotName = ? AND FloorNum = ?"
+            var sqlQueryPoly = "SELECT LeftLine, RightLine, TopLine, BottomLine, DegRotation, Available FROM parkingspot WHERE LotName = ? AND FloorNum = ?"
             var querySQL = QuerySQL()
             var results : ResultSet = querySQL.execute(sqlQueryPoly,LotNameString, FloorNumInt)
             while(results.next()) {
-                var left : Float = results.getFloat("Left")
-                var right  : Float = results.getFloat("Right")
-                var top  : Float = results.getFloat("Top")
-                var bottom : Float = results.getFloat("Bottom")
+                var left : Float = results.getFloat("LeftLine")
+                var right  : Float = results.getFloat("RightLine")
+                var top  : Float = results.getFloat("TopLine")
+                var bottom : Float = results.getFloat("BottomLine")
                 var degRotation : Float = results.getFloat("DegRotation")
                 var avail : Int = results.getInt("Available")
 
@@ -101,11 +100,11 @@ class LotDisplay : AppCompatActivity() {
     }
 
     private fun getMapBmp() : Bitmap{
-        var sqlQueryStr = "SELECT lotMap FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
+        var sqlQueryStr = "SELECT LotImage FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr,LotNameString, FloorNumInt)
         if(results.next()) {
-            var blob : Blob = results.getBlob("lotMap")
+            var blob : Blob = results.getBlob("LotImage")
             var mapBytes = blob.getBytes(1, blob.length().toInt())
             bmp = BitmapFactory.decodeByteArray(mapBytes,0, blob.length().toInt())
         }
