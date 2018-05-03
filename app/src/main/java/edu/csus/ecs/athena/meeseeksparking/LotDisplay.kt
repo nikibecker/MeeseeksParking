@@ -22,13 +22,13 @@ class LotDisplay : AppCompatActivity() {
     var LotNameString : String = "lot1" //pushed from the previous activity
     var FloorNumInt : Int = 0 //pushed from the previous activity
     var conf: Bitmap.Config = Bitmap.Config.ARGB_8888 // see other conf types
-    var bmp = Bitmap.createBitmap(0, 0, conf)
+    var bmp : Bitmap = Bitmap.createBitmap(1, 1, conf)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lot_display)
 
-        LotNameString = "GetNameFromActivityPush" //TODO retrieve correct name
+        LotNameString = "lot3" //TODO retrieve correct name
         FloorNumInt = 1 //TODO retreive correct floor
 
         getMapBmp()
@@ -37,6 +37,7 @@ class LotDisplay : AppCompatActivity() {
         val background = Canvass(this)
         scrollyBoi.addView(background)
     }
+
     inner class Canvass(context: Context) : View(context) {
 
         //val bmp = BitmapFactory.decodeResource(resources, R.mipmap.lot3)
@@ -100,7 +101,7 @@ class LotDisplay : AppCompatActivity() {
     }
 
     private fun getMapBmp() : Bitmap{
-        var sqlQueryStr = "SELECT LotImage FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
+        var sqlQueryStr = "SELECT LotImage FROM lotgrid WHERE LotName = ? AND FloorNum = ?"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr,LotNameString, FloorNumInt)
         if(results.next()) {
