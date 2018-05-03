@@ -29,19 +29,22 @@ class LotDisplay : AppCompatActivity() {
     var FloorNumInt : Int = 0 //pushed from the previous activity
     var conf: Bitmap.Config = Bitmap.Config.ARGB_8888 // see other conf types
     var bmp : Bitmap = Bitmap.createBitmap(1, 1, conf)
+    var flag : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lot_display)
 
-        LotNameString = "lot3" //TODO retrieve correct name
-        FloorNumInt = 1 //TODO retreive correct floor
+
+        LotNameString = intent.extras.getString("lotNameData") //TODO retrieve correct name
+        FloorNumInt = intent.extras.getInt("floorNumData") //TODO retreive correct floor
 
         getMapBmp()
-
-        val scrollyBoi = findViewById<HorizontalScrollView>(R.id.scrollyBoi) as LinearLayout
-        val background = Canvass(this)
-        scrollyBoi.addView(background)
+        if (flag) {
+            val scrollyBoi = findViewById<HorizontalScrollView>(R.id.scrollyBoi) as LinearLayout
+            val background = Canvass(this)
+            scrollyBoi.addView(background)
+        }
     }
 
     inner class Canvass(context: Context) : View(context) {
@@ -119,7 +122,10 @@ class LotDisplay : AppCompatActivity() {
             var blob : Blob = results.getBlob("LotImage")
             var mapBytes = blob.getBytes(1, blob.length().toInt())
             bmp = BitmapFactory.decodeByteArray(mapBytes,0, blob.length().toInt(), options)
+            flag = true
         }
+        else
+            flag = false
         querySQL.close()
         return bmp
     }
