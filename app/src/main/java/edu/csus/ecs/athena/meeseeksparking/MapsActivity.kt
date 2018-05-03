@@ -99,9 +99,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //Instantiate the Map for Google
         myMap = googleMap
         myMap1 = googleMap
-        myMap2 = googleMap
-        myMap3 = googleMap
-        myMap4 = googleMap
+        //myMap2 = googleMap
+        //myMap3 = googleMap
+        //myMap4 = googleMap
 
         // Add a marker in Sacramento State and zoom in to view the campus positions well
         val SacState = LatLng(38.5611, -121.4240)
@@ -109,7 +109,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         myMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(SacState, 15.5f))
 
         //Start code for dynamic polygon creation
-        val map = mutableMapOf<String, Int>()
+        //val map = mutableMapOf<String, Int>()
         var i = 0
 
         for (name in lotNames) {

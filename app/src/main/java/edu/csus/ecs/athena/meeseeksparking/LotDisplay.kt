@@ -115,7 +115,7 @@ class LotDisplay : AppCompatActivity() {
         options.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi
         options.inScaled = true
 
-        var sqlQueryStr = "SELECT LotImage FROM lotgrid WHERE LotName = ? AND FloorNum = ?"
+        var sqlQueryStr = "SELECT LotImage FROM lotgrid WHERE LotName = ? AND FloorNum = ? AND LotImage IS NOT NULL"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr,LotNameString, FloorNumInt)
         if(results.next()) {
