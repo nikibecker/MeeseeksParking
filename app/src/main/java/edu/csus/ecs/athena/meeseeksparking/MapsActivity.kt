@@ -101,6 +101,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val spotCounts : MutableList<Int> = ArrayList()
         val spotsTaken : MutableList<Int> = ArrayList()
         val polys : MutableList<String> = ArrayList()
+        val lots : MutableMap<Int, Polygon>
+        val names : MutableMap<Int, String>
 
         while (results.next())
         {
@@ -146,19 +148,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else
                     color = 0x33FFFF00
 
-            myMap.setOnPolygonClickListener {
-                val intentlot5 = Intent(this, LotDisplay::class.java)
-                startActivity(intentlot5)
-            }
-
             myMap.addPolygon(PolygonOptions()
 
                     .clickable(true)
                     .addAll(latLongs)
                     .fillColor(color)
                     .strokeWidth(0.75F)
+                    .zIndex(i.toFloat())
             )
             i++
+        }
+
+        myMap.setOnPolygonClickListener {
+            val intent = Intent(this, LotDisplay::class.java)
+            val extras = Bundle()
+            val lotName = "Lot1" //need to make dynamic
+            extras.putString("lotNameData", lotName)
+            extras.putInt("floorNumData", 1)
+            startActivity(intent)
         }
 
         /*
