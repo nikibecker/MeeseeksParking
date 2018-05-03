@@ -14,6 +14,12 @@ import android.widget.LinearLayout
 import java.sql.Blob
 import java.sql.ResultSet
 import android.graphics.Bitmap
+import android.util.DisplayMetrics
+import android.graphics.BitmapFactory
+
+
+
+
 
 
 
@@ -101,13 +107,18 @@ class LotDisplay : AppCompatActivity() {
     }
 
     private fun getMapBmp() : Bitmap{
+        val options = BitmapFactory.Options()
+        options.inDensity = DisplayMetrics.DENSITY_MEDIUM
+        options.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi
+        options.inScaled = true
+
         var sqlQueryStr = "SELECT LotImage FROM lotgrid WHERE LotName = ? AND FloorNum = ?"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr,LotNameString, FloorNumInt)
         if(results.next()) {
             var blob : Blob = results.getBlob("LotImage")
             var mapBytes = blob.getBytes(1, blob.length().toInt())
-            bmp = BitmapFactory.decodeByteArray(mapBytes,0, blob.length().toInt())
+            bmp = BitmapFactory.decodeByteArray(mapBytes,0, blob.length().toInt(), options)
         }
         querySQL.close()
         return bmp
