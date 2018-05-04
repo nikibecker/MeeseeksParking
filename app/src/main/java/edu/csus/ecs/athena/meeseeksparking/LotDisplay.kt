@@ -90,13 +90,14 @@ class LotDisplay : AppCompatActivity() {
 
                 canvas.save()
                 canvas.rotate(degRotation, (left+right)/2, (top+bottom)/2)
+                val density : Float = getResources().getDisplayMetrics().density
                 if (avail == 1)
-                    canvas.drawRect(left, top, right, bottom, green)
+                    canvas.drawRect(left * density, top * density, right * density, bottom * density, green)
 
                 else
-                    canvas.drawRect(left, top, right, bottom, red)
+                    canvas.drawRect(left * density, top * density, right * density, bottom * density, red)
 
-                canvas.drawRect(left, top, right, bottom, edge)
+                canvas.drawRect(left * density, top * density, right * density, bottom * density, edge)
                 canvas.restore()
             }
             querySQL.close()
@@ -109,9 +110,9 @@ class LotDisplay : AppCompatActivity() {
         }
     }
 
-    private fun getMapBmp() : Bitmap{
+    private fun getMapBmp() {
         val options = BitmapFactory.Options()
-        options.inDensity = DisplayMetrics.DENSITY_MEDIUM
+        options.inDensity = DisplayMetrics.DENSITY_DEFAULT
         options.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi
         options.inScaled = true
 
@@ -127,6 +128,5 @@ class LotDisplay : AppCompatActivity() {
         else
             flag = false
         querySQL.close()
-        return bmp
     }
 }
