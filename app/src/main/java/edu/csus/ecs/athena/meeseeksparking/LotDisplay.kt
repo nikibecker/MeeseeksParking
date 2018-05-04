@@ -9,41 +9,64 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
-import android.widget.LinearLayout
 import java.sql.Blob
 import java.sql.ResultSet
 import android.graphics.Bitmap
 import android.util.DisplayMetrics
 import android.graphics.BitmapFactory
-
-
-
-
-
+import android.widget.*
+import android.content.Intent
 
 
 class LotDisplay : AppCompatActivity() {
 
-    var LotNameString : String = "lot1" //pushed from the previous activity
-    var FloorNumInt : Int = 0 //pushed from the previous activity
-    var conf: Bitmap.Config = Bitmap.Config.ARGB_8888 // see other conf types
-    var bmp : Bitmap = Bitmap.createBitmap(1, 1, conf)
-    var flag : Boolean = false
+    private var LotNameString : String = "lot1" //pushed from the previous activity
+    private var FloorNumInt : Int = 0 //pushed from the previous activity
+    private var conf: Bitmap.Config = Bitmap.Config.ARGB_8888 // see other conf types
+    private var bmp : Bitmap = Bitmap.createBitmap(1, 1, conf)
+    private var flag : Boolean = false
+    private var availSpotNum : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lot_display)
 
-
+        //Gets the data that was pushed when this activity was created
         LotNameString = intent.extras.getString("lotNameData") //TODO retrieve correct name
         FloorNumInt = intent.extras.getInt("floorNumData") //TODO retreive correct floor
 
+        //gets data from the server
+        getAvailSpotNum()
         getMapBmp()
+
+        //Checks to make sure the bitmap is not empty
         if (flag) {
             val scrollyBoi = findViewById<HorizontalScrollView>(R.id.scrollyBoi) as LinearLayout
             val background = Canvass(this)
             scrollyBoi.addView(background)
+        }
+
+        //Creates the drop down list and populates it with possible floors
+        // for that lot
+        val dropDown = findViewById <Spinner> (R.id.ddFloorNum)
+        val adapter = ArrayAdapter<Int>(this, android.R.layout.simple_spinner_item, getFloorNums())
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dropDown.adapter = adapter
+        dropDown.setSelection(adapter.getPosition(FloorNumInt))
+        dropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val floorNumSelected : Int = dropDown.getItemAtPosition(position).toString().toInt()
+                if(floorNumSelected != FloorNumInt) {
+
+                    val intentLotDisplay = Intent(applicationContext, LotDisplay::class.java)
+                    intentLotDisplay.putExtra("lotNameData", LotNameString)
+                    intentLotDisplay.putExtra("floorNumData", floorNumSelected)
+                    finish()
+                    startActivity(intentLotDisplay)
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
 
@@ -101,15 +124,33 @@ class LotDisplay : AppCompatActivity() {
                 canvas.restore()
             }
             querySQL.close()
-
-
-            //canvas.save()
-           // canvas.rotate(45f, 105f, 1100f)
-            //canvas.drawRect(10f, 1000f, 200f, 1200f, red)
-            //canvas.restore()
         }
     }
 
+    //gets all the floor numbers for a structure/lot
+    private fun getFloorNums() : ArrayList<Int>{
+        val spinnerArray = ArrayList<Int>()
+        var sqlQueryStr = "SELECT FloorNum FROM parkinglot WHERE LotName = ?"
+        var querySQL = QuerySQL()
+        var results : ResultSet = querySQL.execute(sqlQueryStr,LotNameString)
+        while(results.next()) {
+            spinnerArray.add(results.getInt("FloorNum"))
+        }
+        return spinnerArray
+    }
+
+    //Gets the number of available spots in the lot/floor
+    private fun getAvailSpotNum() {
+        var sqlQueryStr = "SELECT SpotAvail FROM parkinglot WHERE LotName = ? AND FloorNum = ?"
+        var querySQL = QuerySQL()
+        var results : ResultSet = querySQL.execute(sqlQueryStr,LotNameString, FloorNumInt)
+        if(results.next()) {
+            availSpotNum = results.getInt("SpotAvail")
+        }
+        findViewById <TextView> (R.id.tvAvailSpots).text = "Spots Available: " + availSpotNum
+    }
+
+    //Gets the bitmap picture from the database
     private fun getMapBmp() {
         val options = BitmapFactory.Options()
         options.inDensity = DisplayMetrics.DENSITY_DEFAULT

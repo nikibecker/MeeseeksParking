@@ -69,10 +69,6 @@ class Overview : AppCompatActivity() {
             lotNameSelected = (clickedData)[0]
             lotFloorSelected = (clickedData)[1].toInt()
             var intentLotDisplay = Intent(applicationContext, LotDisplay::class.java)
-            //val extras = Bundle()
-            //extras.putString("lotNameData", lotNameSelected)
-            //extras.putString("floorNumData", lotFloorSelected.toString())
-            //intentLotDisplay.putExtras(extras)
             intentLotDisplay.putExtra("lotNameData", lotNameSelected)
             intentLotDisplay.putExtra("floorNumData", lotFloorSelected)
             startActivity(intentLotDisplay)
