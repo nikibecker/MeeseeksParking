@@ -138,7 +138,6 @@ class parkingLotList : AppCompatActivity() {
         override fun onDataClicked(rowIndex: Int, clickedData: Array<String>) {
             lotNameSelected = (clickedData)[0]
             lotFloorSelected = (clickedData)[1].toInt()
-            //(lotNameSelected + "\nfloor: " + lotFloorSelected.toString()).toast(getApplicationContext())
             findViewById <TextView> (R.id.tvLotName).text = lotNameSelected
             findViewById <TextView> (R.id.tvFloorNum).text = lotFloorSelected.toString()
         }

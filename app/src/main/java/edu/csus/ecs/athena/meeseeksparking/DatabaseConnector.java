@@ -10,6 +10,11 @@ import java.util.Properties;
 public class DatabaseConnector {
 
     // Connect to database
+    /*
+    -----------------------------------------------------------------
+            Change this variables to connect to different server
+    -----------------------------------------------------------------
+     */
     private String host = "meeseeks-server.mysql.database.azure.com";
     private String database = "meeseeksdb";
     private String user = "Meeseeks@meeseeks-server";
