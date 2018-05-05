@@ -3,6 +3,7 @@ package edu.csus.ecs.athena.meeseeksparking
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.graphics.Color
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_maps.*
 import com.google.android.gms.maps.model.*
 import java.sql.ResultSet
 import java.util.*
+import java.lang.*
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -59,7 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         // Get data from database and put data into data structures.
-        var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName"
+        var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName AND parkinglot.FloorNum=1"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr)
 
@@ -100,14 +102,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 latLongs.add(LatLng(x, y))
             }
 
-            var color = 0x33FFFF00
-            val a = spotsTaken.get(i)/spotCounts.get(i)
-            if (a > .90 && a <= 1.00)
-                    color = 0x33990000
-            else if(a >= 0 && a <= .80)
-                    color = 0x33009900
+            var color = Color.YELLOW
+            val a = spotsTaken.get(i).toDouble()/spotCounts.get(i).toDouble()
+            if (a >= .85)
+                color = Color.RED
+            else if(a < .50)
+                color = Color.GREEN
             else
-                    color = 0x33FFFF00
+                color = Color.YELLOW
 
             myMap.addPolygon(PolygonOptions()
 
