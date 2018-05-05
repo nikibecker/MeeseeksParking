@@ -147,7 +147,7 @@ class LotDisplay : AppCompatActivity() {
         if(results.next()) {
             availSpotNum = results.getInt("SpotAvail")
         }
-        findViewById <TextView> (R.id.tvAvailSpots).text = "Spots Available: " + availSpotNum
+        findViewById <TextView> (R.id.tvAvailSpots).text = LotNameString + " Spots Available: " + availSpotNum
     }
 
     //Gets the bitmap picture from the database

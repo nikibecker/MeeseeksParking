@@ -61,7 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         // Get data from database and put data into data structures.
-        var sqlQueryStr = "SELECT parkinglot.LotName, parkinglot.SpotCount, parkinglot.SpotTaken, ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName AND parkinglot.FloorNum=1"
+        var sqlQueryStr = "SELECT lotgrid.LotName, SUM(parkinglot.SpotCount) as TotalCount, SUM(parkinglot.SpotTaken) as TotalTaken , ST_ASText(lotgrid.Poly) FROM lotgrid, parkinglot WHERE parkinglot.LotName=lotgrid.LotName GROUP BY lotgrid.LotName"
         var querySQL = QuerySQL()
         var results : ResultSet = querySQL.execute(sqlQueryStr)
 
@@ -101,21 +101,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val y = xys.substringAfter(" ").toDouble()
                 latLongs.add(LatLng(x, y))
             }
-            sqlQueryStr = "SELECT SUM(SpotTaken), SUM(SpotCount) FROM parkinglot WHERE LotName= ? "
-            querySQL = QuerySQL()
-            var results2 : ResultSet = querySQL.execute(sqlQueryStr, name)
-
-            var taken = 0
-            var tot = 0
-            while (results2.next())
-            {
-                taken = results2.getInt(1)
-                tot = results2.getInt(2)
-            }
-            querySQL.close()
 
             var color: Int
-            val a = taken.toDouble() / tot.toDouble()
+            val a = spotsTaken.get(i).toDouble() / spotCounts.get(i).toDouble()
             if (a >= .85)
                 color = Color.RED
             else if(a < .50)
