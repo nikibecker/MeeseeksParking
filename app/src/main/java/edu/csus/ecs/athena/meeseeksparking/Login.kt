@@ -15,11 +15,6 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        btnParkingMap.setOnClickListener{
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-        }
-
         btnLogin.setOnClickListener{
             var sqlQueryStr = "SELECT * FROM users WHERE CSUSID = ? AND Password = ? AND PrivFlag = ?"
             var userID = findViewById <EditText> (R.id.etUserID).text.toString()
