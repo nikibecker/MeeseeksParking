@@ -75,8 +75,8 @@ class parkingLotList : AppCompatActivity() {
 
     //refreshes table when activity is returned to
     // after a Back button is pressed from another activity
-    override fun onResume() {
-        super.onResume()
+    override fun onPause() {
+        super.onPause()
         populateTable()
     }
 
