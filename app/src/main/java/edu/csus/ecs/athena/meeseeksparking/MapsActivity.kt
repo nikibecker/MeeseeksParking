@@ -101,9 +101,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val y = xys.substringAfter(" ").toDouble()
                 latLongs.add(LatLng(x, y))
             }
+            sqlQueryStr = "SELECT SUM(SpotTaken), SUM(SpotCount) FROM parkinglot WHERE LotName= ? "
+            querySQL = QuerySQL()
+            var results2 : ResultSet = querySQL.execute(sqlQueryStr, name)
 
-            var color = Color.YELLOW
-            val a = spotsTaken.get(i).toDouble()/spotCounts.get(i).toDouble()
+            var taken = 0
+            var tot = 0
+            while (results2.next())
+            {
+                taken = results2.getInt(1)
+                tot = results2.getInt(2)
+            }
+            querySQL.close()
+
+            var color: Int
+            val a = taken.toDouble() / tot.toDouble()
             if (a >= .85)
                 color = Color.RED
             else if(a < .50)
